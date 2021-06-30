@@ -27,7 +27,7 @@ const doc = document,
     const parallax = await import('./parallax.js');
     const map = await import('./map.js');
 
-    // loadReviews().then(() => loadCarousel());
+    loadReviews().then(() => loadCarousel());
   }
   if (
     parsedUrl.pathname === '/about' ||
