@@ -1,7 +1,6 @@
 {
   "name": "hochutort-website",
   "version": "1.0.0",
-  "description": "hochutort-website",
   "scripts": {
     "start": "parcel src/index.pug --no-cache --dist-dir ./public",
     "clear": "rm -rf public && rm -rf .parcel-cache",
@@ -14,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mevius6/hochutort-monorepo.git"
+    "url": "git+https://github.com/mevius6/restaurant-monorepo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mevius6/hochutort-monorepo/issues"
+    "url": "https://github.com/mevius6/restaurant-monorepo/issues"
   },
-  "homepage": "https://github.com/mevius6/hochutort-monorepo#readme",
+  "homepage": "https://github.com/mevius6/restaurant-monorepo#readme",
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.0.0-beta.3.1",
     "@parcel/transformer-image": "^2.0.0-beta.3.1",
