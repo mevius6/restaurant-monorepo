@@ -34,8 +34,10 @@ html(class="no-js" dir="ltr" lang="ru")
     noscript: h2 В вашем браузере необходимо включить JavaScript.
     include ./_header
 
+    //- https://schema.org/docs/datamodel.html#mainEntityBackground
     main(
       data-id= page.id
+      itemprop="mainEntity"
       itemscope itemtype="https://schema.org/Restaurant"
       itemid= data.meta.domain
     )
@@ -49,8 +51,8 @@ html(class="no-js" dir="ltr" lang="ru")
       block content
 
     include ./_cursor
-    script(src="./js/index.js")
     block scripts
 
     prepend scripts
+      script(src="./js/index.js")
       script(src="./a2hs.js")
