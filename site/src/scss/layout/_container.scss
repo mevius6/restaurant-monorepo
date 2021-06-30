@@ -1,0 +1,210 @@
+@use '../config';
+
+// https://github.com/dbaron/container-queries-implementability#proposal
+// @container (max-width: 45em) {}
+
+main {
+  min-inline-size: 100%;
+  block-size: 100%;
+  contain: size;
+}
+
+section {
+  position: relative;
+  inline-size: 100vw;
+  min-block-size: 100vh;
+  // https://web.dev/content-visibility/
+  content-visibility: auto;
+  background-color: var(--background);
+
+  &[data-id='hero'] {
+    display: grid;
+    place-content: center;
+    // place-items: center;
+  }
+
+  &[data-id='posts'],
+  &[data-id='reviews'] {
+    --flow-space: var(--spacer-5); // 3vmax
+
+    display: flex;
+    // max-inline-size: var(--container-lg);
+    min-height: min-content;
+    margin-block: 5vmax;
+    // margin-inline: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &[data-id='posts'] {
+    // .reveal-wrapper { margin-inline-end: auto; }
+
+    .card-feed {
+      @include config.scroll-snap('x', 'mandatory', '.item', 'center');
+
+      max-inline-size: var(--container-lg);
+      padding-inline: var(--spacer-3);
+      grid-template-columns:
+        repeat(
+          var(--columns),
+          minmax(var(--min-col-size, 20em), 1fr)
+        );
+      grid-template-rows: 1fr;
+      gap: var(--spacer-3);
+
+      .item {
+        position: relative;
+        // display: grid;
+        place-items: start center;
+        inline-size: 100%;
+        user-select: none;
+      }
+
+      // &__cta { margin-inline-start: auto; }
+    }
+  }
+
+  &[data-id='reviews'] {
+    h2 { text-align: center; }
+  }
+
+  &[data-id='about'] {
+    article {
+      --flow-space: var(--spacer-4);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      max-inline-size: 100%;
+      padding: var(--gutter);
+      flex-direction: column;
+      background-color: var(--background);
+      border-radius: 2px;
+      place-self: center;
+      align-items: flex-start;
+    }
+
+    [data-theme-style='dark'] & {
+      picture { filter: saturate(80%); }
+    }
+  }
+
+  &[data-id='slideshow'] {
+    --align-items: end;
+    display: grid;
+    background-color: var(--background);
+    place-items: var(--align-items) center;
+
+    @include config.respond('tablet') {
+      --align-items: safe;
+    }
+  }
+
+  &[data-id='panorama'] {
+    max-block-size: 1080px;
+    overflow: hidden;
+  }
+
+  &[data-id='map'] {
+    block-size: 100vh;
+
+    .extra-controls {
+      --list-gap: 0;
+      --grad-hsl: var(--warm-gray-2);
+
+      position: absolute;
+      top: 0;
+      z-index: 1009;
+      display: none;
+      max-block-size: 100%;
+      padding: var(--spacer-5);
+      overflow-y: auto;
+      flex-direction: column;
+      background:
+        linear-gradient(
+          135deg,
+          hsl(var(--grad-hsl)) 0%,
+          hsl(var(--grad-hsl) / 0.4) 100%
+        );
+      border-radius: 2px;
+      backdrop-filter: blur(6px); // 23px
+
+      [data-theme-style='light'] & {
+        --grad-hsl: var(--warm-gray-1);
+      }
+
+      [name='location']:checked ~ label,
+      [name='location']:focus ~ label {
+        background-color: var(--background);
+      }
+
+      label {
+        display: flex;
+        flex-flow: column;
+        padding: 2ch;
+        cursor: pointer;
+        border-radius: inherit;
+        transition: background-color 175ms var(--easing);
+
+        a {
+          --arrow: '';
+          font-family: inherit;
+
+          &[href*='tel:'] { align-self: flex-start; }
+        }
+      }
+
+      &__item {
+        position: relative;
+        border-radius: inherit;
+
+        &::before {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: unset;
+          margin: var(--spacer-3);
+          font-family: inherit;
+          line-height: 1.1;
+          opacity: var(--a, 0.4);
+          place-self: start;
+          font-variation-settings: 'wght' var(--wght-axis, 96);
+          font-feature-settings: 'onum' 1;
+          will-change: opacity;
+          transition:
+            opacity 150ms ease-in-out,
+            font-variation-settings 150ms ease-in-out;
+        }
+
+        &:hover {
+          --wght-axis: 121; // 106
+          --a: 0.8;
+        }
+      }
+
+      .social {
+        --icon-size: 1.25rem;
+
+        padding-block-start: var(--spacer-3);
+        grid-template-columns:
+          repeat(
+            auto-fit,
+            minmax(var(--icon-size), max-content)
+          );
+        place-items: center;
+        column-gap: var(--icon-size);
+      }
+
+      @include config.respond('tablet') { display: flex; }
+    }
+  }
+}
+
+.reveal-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  :where(section) > & {
+    margin-inline: var(--spacer-3);
+  }
+}

@@ -1,0 +1,37 @@
+@use '../config';
+
+.page__footer {
+  @include config.flow-space(1em);
+
+  position: fixed;
+  bottom: 0;
+  z-index: 1010;
+  display: flex;
+  inline-size: 100%;
+  padding-block: 1em;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  > p > span + span { margin-inline-start: 2ch; }
+
+  > ul {
+    &:nth-of-type(1) { grid-template-columns: repeat(3, 1fr); }
+    &:nth-of-type(2) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  // .byline { font-style: italic; }
+  .logo {
+    display: inline-block;
+    block-size: 100%;
+  }
+
+  a { --arrow: ''; }
+
+  @include config.respond('tablet') {
+    & {
+      --flow-space: 0;
+      flex-direction: row;
+    }
+  }
+}

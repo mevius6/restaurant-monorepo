@@ -1,0 +1,43 @@
+@use '../config';
+
+[data-layout*='staggered'] {
+  --tracks: 4;
+
+  display: grid;
+  grid-template-columns: 100%; // 1fr;
+  grid-template-rows: repeat(var(--tracks), minmax(min-content, 1fr));
+
+  .item {
+    --flow-space: var(--spacer-4);
+
+    position: relative;
+    display: grid;
+    grid-column: -1 / 1;
+    grid-template-columns: inherit;
+    grid-template-columns: subgrid;
+    grid-template-rows: auto 1fr;
+    gap: inherit;
+    min-block-size: 100vh;
+
+    & > * { grid-area: var(--area, 1/1); }
+
+    figure { --area: 1/1; }
+    article { --area: 2/1; }
+  }
+
+  @include config.respond('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+
+    .item { grid-template-rows: 1fr; }
+
+    & > .item:nth-child(odd) {
+      article { --area: 1/2; }
+      figure { --area: 1/1; }
+    }
+
+    & > .item:nth-child(even) {
+      article { --area: 1/1; }
+      figure { --area: 1/2; }
+    }
+  }
+}

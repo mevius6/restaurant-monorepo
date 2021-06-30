@@ -1,0 +1,19 @@
+.page__header {
+  position: fixed;
+  top: 10px;
+  z-index: 1010;
+  display: flex;
+  width: 100%;
+  height: min-content;
+  padding: 0 10px;
+  align-items: center;
+  justify-content: space-between;
+
+  > ul {
+    grid-template-columns: 1fr auto;
+    place-items: center;
+    column-gap: var(--spacer-3);
+  }
+
+  // > .logo { inline-size: calc(112px + 0.25vw); }
+}

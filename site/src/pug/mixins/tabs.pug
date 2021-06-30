@@ -1,0 +1,41 @@
+mixin tabs(props)
+  - let attrs = {}
+  - attrs.class = props.name
+
+  //- .tabs(role="tablist")
+    each tab, i in props.tabs
+      .tabs__tab(role="tab")
+        input(id=`tab-${i}` tabindex="0" type="radio" name="radioTab")&attributes({checked: i === 0})
+        label(for=`tab-${i}`)
+          | #{tab.label}
+        .tabs__content(role="tabpanel")
+          | #{tab.content}
+
+  tab-container&attributes(attrs)
+    div(role="tablist")
+      each item, i in props.data
+        button(
+          type="button"
+          role="tab"
+          tabindex=`${i === 0 ? 0 : -1}`
+        )&attributes({'aria-selected': (i === 0).toString()})
+          | #{item.title}
+      each item, i in props.data
+        div(role="tabpanel")&attributes({'hidden': i !== 0})
+          //- block
+          if Array.isArray(item.field)
+             each subitem in item.field
+               if subitem.lead
+                 p.body
+                   | #{subitem.lead}
+               if subitem.listTitle
+                 +list({
+                   title: subitem.listTitle,
+                   items: subitem.listItems,
+                   ordered: false
+                 })
+               else
+                 +list({
+                   items: subitem.listItems,
+                   ordered: false
+                 })

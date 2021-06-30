@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "domain": "https://hochutort.com",
+    "email": "sales@hochutort.com",
+    "brand": "ХочуТорт",
+    "name": "Кафе-кондитерская «ХочуТорт» в Великом Новгороде",
+    "links": {
+      "apple": "https://apps.apple.com/us/app/%D1%85%D0%BE%D1%87%D1%83%D1%82%D0%BE%D1%80%D1%82-%D0%B2%D0%B5%D0%BB%D0%B8%D0%BA%D0%B8%D0%B9-%D0%BD%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4/id1504846174",
+      "google": "https://play.google.com/store/apps/details?id=ru.FoodSoul.VelikiyNovgorodKonditerskayaHochutort"
+    },
+    "badges": {
+      "apple": "url(https://linkmaker.itunes.apple.com/ru-ru/badge-lrg.svg?releaseDate=2020-05-07&kind=iossoftware&bubble=ios_apps)",
+      "google": "url(https://play.google.com/intl/en_us/badges/static/images/badges/ru_badge_web_generic.png)"
+    },
+    "keywords": "хочуторт,кафе кондитерская"
+  },
+  "pages": {
+    "index": {
+      "id": "index",
+      "path": "/",
+      "title": ["", ""],
+      "description": "«Скрембл в 18:00? Легко! Мы не ограничиваем Вас временными рамками. Хотите позавтракать вечером? — в «ХочуТорт» у Вас есть такая возможность.",
+      "keywords": "торты на заказ великий новгород"
+    },
+    "menu": {
+      "id": "menu",
+      "path": ["menu.pug", "menu"],
+      "title": ["Меню", ""],
+      "description": "Меню «ХочуТорт» — не только про десерты! Это подача блюд европейской и итальянской кухонь, свежемолотый кофе, ароматные травяные чаи, полезные фреши и коктейли из натуральных продуктов.",
+      "keywords": "ресторан итальянской кухни,ресторан европейской кухни"
+    },
+    "atm": {
+      "id": "atm",
+      "path": ["atm.pug", "atm"],
+      "title": ["Атмосфера", ""],
+      "description": "В кафе-кондитерской «ХочуТорт» вы всегда сможете приятно провести время, как с друзьями, так и в кругу семьи.",
+      "keywords": ""
+    },
+    "about": {
+      "id": "about",
+      "path": ["about.pug", "about"],
+      "title": ["О нас", ""],
+      "description": "Наша идея — делать качественно и вкусно, из дорогих продуктов и за адекватные деньги.",
+      "keywords": ""
+    }
+  }
+}

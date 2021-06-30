@@ -1,0 +1,23 @@
+{
+  "env": {
+    "es2020": true,
+    "browser": true,
+    "serviceworker": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "ignoreStrings": true,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true
+      }
+    ]
+  }
+}

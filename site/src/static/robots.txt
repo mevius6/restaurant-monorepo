@@ -1,0 +1,4 @@
+Sitemap: https://hochutort.com/sitemap.xml
+
+User-agent: *
+Disallow:

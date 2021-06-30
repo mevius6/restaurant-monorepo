@@ -1,0 +1,185 @@
+@use '../config';
+
+// https://www.w3.org/TR/wai-aria-practices/#tabpanel
+// https://www.w3.org/TR/wai-aria-practices/examples/tabs/tabs-1/tabs.html
+
+[role='tablist'] {
+  --tab-background: var(--background);
+  --tab-selected-background: var(--background);
+  --tab-selected-color: var(--background);
+  --tab-border-color: var(--accent);
+  --tab-border-width: 1px;
+  --tab-r: 2px;
+  --top-offset: var(--spacer-5);
+
+  max-inline-size: var(--container-md);
+  margin: var(--top-offset) 0 -0.1em;
+  overflow: visible;
+}
+
+[role='tab'],
+[role='tabpanel'] {
+  border-color: var(--tab-border-color);
+  border-style: solid;
+  border-width: var(--tab-border-width);
+  border-image-source:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      33.33333%,
+      var(--accent-shade)
+    );
+  border-image-slice: 1;
+}
+
+[role='tab'] {
+  position: relative;
+  max-block-size: 44px;
+  padding: 1ch 1.25ch;
+  margin: 0;
+  overflow: visible;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: italic;
+  background: var(--tab-background);
+  // border: var(--tab-border-width) solid var(--tab-border-color);
+  border-width: var(--tab-border-width) var(--tab-border-width) 0;
+  border-radius: var(--tab-r) var(--tab-r) 0 0;
+  box-shadow: 0 0 0.2em var(--shadow);
+  transition: font-variation-settings 150ms ease-in-out;
+
+  font-variation-settings: 'wght' var(--weight-axis);
+
+  &:hover::before,
+  &:focus::before,
+  &[aria-selected='true']::before {
+    position: absolute;
+    bottom: 100%;
+    content: '';
+    border-top: 3px solid var(--tab-border-color);
+    border-radius: var(--tab-r) var(--tab-r) 0 0;
+    transition:
+      border-color 150ms ease-in-out,
+      border-width 150ms ease-in-out;
+    inset-inline: -1px;
+  }
+
+  &[aria-selected='true'] {
+    --weight-axis: 121;
+
+    background: var(--tab-selected-background);
+    border-radius: 0;
+    outline: 0;
+  }
+
+  // stylelint-disable selector-max-specificity
+  &[aria-selected='true']:not(:focus):not(:hover)::before {
+    border-color: var(--accent-shade);
+    border-width: 5px;
+  }
+
+  // &::after { transition: all 150ms var(--easing); }
+
+  &:is(:hover, :focus, :active) {
+    // --weight-axis: 121;
+
+    color: inherit;
+    border-radius: 0;
+    outline: 0;
+  }
+
+  &:hover::before,
+  &:focus::before {
+    border-color: var(--accent);
+  }
+
+  @include config.respond('tablet') {
+    & {
+      padding: 1ch 2ex;
+    }
+
+    &[aria-selected='true']::after {
+      position: absolute;
+      right: 0;
+      bottom: -2px;
+      left: 0;
+      z-index: 3;
+      height: 0.3em;
+      content: '';
+      background: var(--tab-selected-background);
+      box-shadow: none;
+    }
+  }
+}
+
+[role='tabpanel'] {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  padding: var(--spacer-2) 1.25ch;
+  background: var(--tab-selected-background);
+  border-radius: 0 var(--tab-r) var(--tab-r);
+  box-shadow: 0 0 0.2em var(--shadow);
+  align-content: start;
+  grid-template-columns: repeat(2, minmax(min-content, 1fr));
+  // grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: var(--spacer-2);
+
+  &:focus {
+    // border-color: hsl(20, 96%, 48%);
+    outline: 0;
+    // box-shadow: 0 0 0.2em hsl(20, 96%, 48%);
+  }
+
+  &:focus::after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    // border-bottom: 3px solid hsl(20, 96%, 48%);
+    border-radius: 0 0 var(--tab-r) var(--tab-r);
+    inset-inline: -1px;
+  }
+
+  > h4 {
+    @include config.text-gradient(
+      to right,
+      var(--accent),
+      var(--accent-shade)
+    );
+
+    position: relative;
+    // hyphens: manual;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-1);
+
+    &:not(:last-of-type)::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 0.5px;
+      content: '';
+      background: hsl(var(--light-gray-2));
+      opacity: 0.75;
+    }
+  }
+
+  > ul {
+    gap: var(--spacer-3);
+
+    &:not(:last-child) > li:last-child {
+      margin-block-end: var(--spacer-4);
+    }
+  }
+
+  @include config.respond('tablet') {
+    & {
+      padding: var(--spacer-4) 2ex;
+      column-gap: var(--spacer-3);
+      row-gap: var(--spacer-4);
+      place-content: start;
+    }
+  }
+}

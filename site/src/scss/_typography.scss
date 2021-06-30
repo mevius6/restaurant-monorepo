@@ -1,0 +1,283 @@
+@use 'config';
+
+:root {
+  min-height: 0;
+  // https://websemantics.uk/tools/responsive-font-calculator/
+  // 16—24px
+  font-size: clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.6944)), 1.5rem);
+}
+
+body {
+  @include config.typeset('serif', 'light');
+
+  // https://css-tricks.com/accessible-font-sizing-explained/
+  --px2rem: calc((var(--px-size) / 16) * 1rem);
+  --letter-spacing-1: 0.025em; // ~0.4px
+  --letter-spacing-2: 0.078125em; // ~1.25px
+  --letter-spacing-3: 0.09375em; // ~1.5px
+
+  // font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Apoc LC,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Helvetica Neue,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  font-size: var(--px2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+
+  @include config.respond('retina') {
+    & {
+      /* autoprefixer: off */
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+}
+
+p,
+li,
+h2,
+h3,
+h4 {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+p,
+h4 {
+  hyphens: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @include config.typeset('serif', 'light');
+
+  --px2rem: calc((var(--px-size) / 16) * 1rem);
+  font-size: var(--px2rem);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+h1 {
+  --px-size: 40; // 48
+  line-height: calc(1ex / 0.44);
+
+  // https://www.w3.org/TR/css-inline-3/#line-height
+  text-edge: cap alphabetic;
+  leading-trim: both;
+}
+
+h2 {
+  @include config.text-gradient(
+    to right,
+    var(--accent),
+    var(--accent-shade)
+  );
+
+  --px-size: 32;
+  position: relative;
+  line-height: calc(1ex / 0.42);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-1);
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    // width: 100%;
+    width: var(--underline-width, 0);
+    height: 0.5px;
+    content: '';
+    background: var(--underline-color, var(--accent));
+    opacity: var(--underline-alpha, 0.75);
+
+    // [data-theme-style='dark'] & {
+    //   --underline-color: hsl(var(--light-gray-2));
+    // }
+  }
+
+  span {
+    :where([data-browser='Chrome'],[data-browser='Safari']) & {
+      background: inherit;
+    }
+  }
+}
+
+h3 {
+  --px-size: 26;
+  line-height: calc(1ex / 0.38);
+}
+
+h4 {
+  --px-size: 22;
+  line-height: calc(1ex / 0.37);
+}
+
+.num {
+  --px-size: 48;
+  --px2rem: calc((var(--px-size) / 16) * 1rem);
+
+  font-size: var(--px2rem);
+  line-height: 1;
+}
+
+[class*='counter-curr'],
+[class*='counter-max'] {
+  @include config.text-gradient(
+    to right,
+    var(--accent),
+    var(--accent-shade)
+  );
+}
+
+article {
+  // 60-75ch
+  max-inline-size: 60ch;
+
+  h2,
+  h3,
+  h4 {
+    // 30-40ch
+    max-inline-size: 30ch;
+  }
+
+  p,
+  li {
+    --px-size: 16;
+    max-inline-size: 100%;
+    line-height: calc(1ex / 0.32);
+  }
+}
+
+.review {
+  p {
+    --px-size: 16;
+    line-height: calc(1ex / 0.32);
+  }
+}
+
+@supports (font-size-adjust: 1) {
+  article,
+  .review {
+    font-size-adjust: 0.5;
+  }
+}
+
+[class$='logo'] {
+  @include config.typeset('display', 400);
+  @include config.text-gradient(
+    to right,
+    var(--accent),
+    var(--accent-shade)
+  );
+  font-feature-settings: 'cswh' 1;
+}
+
+[class$='title'] {
+  z-index: 1;
+  display: flex;
+  font-size: calc(2.5rem + 5vw);
+  line-height: 1.15;
+  color: var(--background);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-2);
+  flex-flow: column;
+}
+
+[role$='subtitle'] {
+  // https://adrianroselli.com/2020/08/be-wary-of-doc-subtitle.html
+}
+
+[class*='headline'] {
+  letter-spacing: 0.03rem;
+}
+
+[class*='body'],
+[class*='lead'] {
+  @include config.typeset('sans', 400);
+}
+
+// [class$='subhead'] { font-weight: 500; }
+
+[class$='body'] { font-weight: 400; }
+
+[class$='link'],
+[class*='cta'] {
+  @include config.typeset('sans', 400);
+}
+
+[class*='overline'],
+[class*='byline'] {
+  margin-block-start: var(--spacer-3);
+  font-size: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.75;
+  font-feature-settings: 'case' 1;
+  font-variation-settings: 'wght' 106;
+}
+
+[class*='overline'] {
+  margin-block-end: var(--spacer-3);
+}
+
+[class$='byline'] {
+  font-feature-settings: 'ss01' 1;
+}
+
+[href*='tel'],
+[type*='tel'] {
+  font-feature-settings: 'case' 1;
+}
+
+.price {
+  font-variant-numeric: tabular-nums;
+  // font-feature-settings: 'tnum' 1, 'zero' 1, 'case' 1;
+}
+
+time { font-feature-settings: 'case' 1; }
+
+@include config.respond('tablet') {
+  .num {
+    --px-size: 64;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h2 {
+    --px-size: 40;
+    line-height: calc(1ex / 0.42);
+  }
+
+  h3 {
+    --px-size: 32;
+    line-height: calc(1ex / 0.42);
+  }
+
+  h4 {
+    --px-size: 24;
+    line-height: calc(1ex / 0.37);
+  }
+}
+
+.has-dropcap::first-letter {
+  float: left;
+  margin: 0.1em 0.1em 0.2em 0;
+  font-size: 6rem;
+  font-weight: 500;
+  line-height: 0.65;
+}

@@ -1,0 +1,119 @@
+@use '../config';
+
+// https://web.dev/carousel-best-practices/
+// https://w3c.github.io/aria-practices/#carousel
+
+.carousel {
+  --min-col-size: 20em;
+  --max-col-size: 65ch;
+
+  display: grid;
+  contain: content;
+  justify-self: start;
+  column-gap: var(--gutter);
+
+  [data-id='reviews'] & {
+    will-change: transform;
+    grid-template-columns:
+      repeat(
+        var(--columns),
+        minmax(calc(var(--min-col-size) - var(--gutter) * 2), 1fr)
+      );
+    grid-template-rows: minmax(var(--min-col-size), 1fr);
+
+    @include config.respond('tablet') {
+      grid-template-columns:
+        repeat(
+          var(--columns),
+          minmax(calc(var(--max-col-size) - var(--gutter) * 2), 1fr)
+        );
+    }
+  }
+
+  .item {
+    position: relative;
+    // display: grid;
+    place-items: start center;
+    inline-size: 100%;
+    user-select: none;
+  }
+}
+
+.paging {
+  --dot-size: 1rem;
+  --list-item-gap: 0;
+
+  display: inline-flex;
+  grid-row: 2;
+  place-self: end center;
+  column-gap: 0;
+  margin-block-start: calc(var(--gutter) + var(--dot-size));
+
+  & > * + * {
+    margin-left: calc(var(--dot-size) * 0.75);
+
+    @include config.respond('tablet') {
+      margin-inline-start: calc(var(--dot-size));
+    }
+  }
+
+  [type='radio'] {
+    appearance: none;
+    outline: none;
+
+    &:hover ~ label {
+      --sx: 1;
+      --alpha: 0.75;
+    }
+
+    &:checked ~ label,
+    &:focus ~ label {
+      --sx: 0.8;
+      --alpha: 1;
+    }
+  }
+
+  label {
+    --sx: 0.9;
+    --alpha: 0.5;
+
+    flex: 0 0 auto;
+    inline-size: var(--dot-size);
+    block-size: var(--dot-size);
+    margin: 0;
+    cursor: pointer;
+    background-color: var(--foreground);
+    border-radius: 50%;
+    opacity: var(--alpha);
+
+    transition-timing-function: var(--timing);
+    transition-duration: 150ms;
+    transition-property: opacity, transform;
+    transform: scale(var(--sx));
+  }
+}
+
+.column-wrapper {
+  [data-theme-style='dark'] & {
+    @include config.side-fade(
+      hsl(var(--dark-blue) / 0.16),
+      var(--background)
+    );
+  }
+
+  [data-theme-style='light'] & {
+    @include config.side-fade(
+      hsl(var(--light-gray) / 0.16),
+      var(--background)
+    );
+  }
+
+  --min-size: 20em;
+  --max-size: 65ch;
+  --side-fade: 20;
+
+  display: grid;
+  grid-template-columns: minmax(min-content, var(--max-size));
+  grid-template-rows: minmax(20em, 1fr) minmax(1rem, auto);
+  justify-self: self-start;
+}

@@ -1,0 +1,19 @@
+a {
+  position: relative;
+
+  &:link,
+  &:visited {
+    color: var(--link-text-color, var(--foreground));
+    transition: color 150ms ease-in-out;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--link-text-color, hsl(var(--accent)));
+  }
+
+  &:focus-visible {
+    outline: 2px dotted var(--foreground);
+  }
+}

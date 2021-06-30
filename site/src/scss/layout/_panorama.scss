@@ -1,0 +1,36 @@
+@use '../config';
+
+.pano {
+  &-box {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  &-switches {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    transform: translate(-50%, -50%);
+    justify-content: space-between;
+    align-items: center;
+
+    > * + * { margin-inline-start: 1em; }
+  }
+
+  &-switch {
+    inline-size: 44px;
+    block-size: 44px;
+    // font-weight: 600;
+
+    background-color: var(--background);
+    opacity: var(--alpha, 1);
+    flex: 1;
+
+    :hover > &:not(:hover) { --alpha: 0.87; }
+  }
+}

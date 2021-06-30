@@ -1,0 +1,43 @@
+@use 'sass:map';
+
+@mixin bg-images($subdir, $selector: 'image') {
+  $subdir-prefix: '../images';
+  $subdir-list: (
+    'slides1': (
+      1: '1',
+      2: '2',
+      3: '3',
+    ),
+    'slides2': (
+      1: '1',
+      2: '2',
+      3: '3',
+    ),
+    'vertical': (
+      1: '1',
+      2: '2',
+      3: '3',
+      4: '4',
+    ),
+  );
+  $has-subdir: map.has-key($subdir-list, $subdir);
+
+  @if $has-subdir {
+    $opted-subdir: map.get($subdir-list, $subdir);
+
+    @each $index, $value in $opted-subdir {
+      &:nth-of-type(#{$index}) [class$='#{$selector}'] {
+        .webp & {
+          background-image: url('#{$subdir-prefix}/#{$subdir}/#{$value}.webp');
+        }
+
+        .no-webp & {
+          background-image: url('#{$subdir-prefix}/#{$subdir}/#{$value}.webp');
+        }
+      }
+    }
+  }
+  @else {
+    @error 'Подкаталог #{$subdir} отсутствует в #{$subdir-prefix}';
+  }
+}

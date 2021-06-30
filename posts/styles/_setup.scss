@@ -1,0 +1,112 @@
+@use 'config';
+
+* {
+  @include config.scrollbar;
+  box-sizing: inherit;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+
+  &::selection {
+    color: var(--selection-foreground, inherit);
+    text-shadow: none;
+    background: var(--selection-background, inherit);
+
+    /* autoprefixer: ignore next */
+    -webkit-tap-highlight-color: hsl(0 0% 0% / 0);
+  }
+}
+
+:root {
+  // https://drafts.csswg.org/css-color-4/#the-hsl-notation
+  --h: 0;
+  --s: 0%;
+  --l: 96%;
+  --hsl: var(--h) var(--s) var(--l);
+  // #f4f4f4
+  --offwhite: var(--hsl);
+
+  // #161f28
+  --dark-blue: 210 29% 12%;
+  // #b6ada5
+  --warm-gray-1: 28.2 10.4% 68%;
+  // #8c8279
+  --warm-gray-2: 28.4 7.6% 51.2%;
+
+  // #fafaf7
+  --light-gray: 60 23.1% 97.5%;
+  // #dbe0e3
+  --light-gray-2: 202.5 12.5% 87.5%;
+  // #dbeede
+  --light-green: 129.5 35.8% 89.6%;
+
+  color-scheme: light dark;
+
+  &:not([data-theme-style]) {
+    --background: hsl(var(--light-gray));
+    --foreground: hsl(var(--dark-blue));
+    --accent: var(--warm-gray-1);
+    --shadow: hsl(var(--dark-blue) / 0.16);
+  }
+
+  &[data-theme-style='light'] {
+    --background: hsl(var(--light-gray));
+    --foreground: hsl(var(--dark-blue));
+    --accent: var(--warm-gray-1);
+    --shadow: hsl(var(--dark-blue) / 0.16);
+  }
+
+  &[data-theme-style='dark'] {
+    --background: hsl(var(--dark-blue));
+    --foreground: hsl(var(--light-gray));
+    --accent: var(--warm-gray-1);
+    --shadow: transparent;
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+}
+
+html { height: -webkit-fill-available; }
+
+body {
+  --duration: 500ms;
+  --easing: cubic-bezier(0.2, 1, 0.3, 1);
+  // https://drafts.csswg.org/css-align-3/#gutter
+  --gutter: 1.25rem;
+
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+
+  overflow-x: hidden;
+  color: var(--foreground);
+  background: var(--background);
+  transition:
+    color var(--duration) var(--easing),
+    background-color var(--duration) var(--easing);
+}
+
+theme-switch {
+  --theme-switch-border-color: transparent;
+  --theme-switch-icon-size: 1.25rem; // 1lh
+
+  padding-inline-end: var(--gutter);
+
+  [data-theme-style='dark'] & {
+    --theme-switch-icon-filter: invert(100%);
+  }
+}
+
+[data-hidden] {
+  @include config.is-hidden;
+}
+
+@include config.respond('tablet') {
+  //
+}

@@ -1,0 +1,107 @@
+@use '../config';
+
+$icons: (vk, ig, ta, tel, at);
+
+a {
+  position: relative;
+  // overflow: hidden;
+  cursor: pointer;
+
+  &:link,
+  &:visited {
+    &:not([class*='badge']) {
+      color: var(--link-text-color, var(--foreground));
+      transition: all 150ms ease-in-out;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &[aria-current='page'] {
+    color: var(--link-text-color, var(--accent));
+
+    &:not([class*='badge'], [class*='cta']) {
+      text-shadow: none;
+      filter: brightness(120%);
+    }
+  }
+
+  &:focus-visible { outline: 2px dotted var(--foreground); }
+
+  &[href*='://']:not([class*='badge'], [class*='cta'])::after {
+    @include config.typeset('sans', 400);
+
+    // font-family: inherit;
+    font-size: 0.75em;
+    content: var(--arrow, ' ↗');
+  }
+
+  &[download]::after { --arrow: ' ↓'; }
+
+  &[class*='cta'] {
+    @include config.directional-clipping(
+      var(--accent),
+      var(--background)
+    );
+
+    display: inline-flex;
+    min-block-size: 44px;
+    padding: 1ch 2ex;
+    overflow: hidden;
+    line-height: 1.1;
+    cursor: pointer;
+    background-color: var(--background);
+    border-radius: 2px;
+    box-shadow: var(--accent) 0 0 0 1px inset;
+    justify-content: space-around;
+    align-items: center;
+
+    &:is(:focus, :active) { transform: translateY(1px); }
+  }
+
+  & > [data-icon] {
+    --icon-size: 1.25rem;
+
+    display: block;
+    inline-size: var(--icon-size);
+    block-size: var(--icon-size);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  @each $i in $icons {
+    > [data-icon=#{$i}] {
+      background-image: url('../images/#{$i}.svg');
+      // background-image: var(--#{$i});
+    }
+  }
+}
+
+.badges {
+  display: flex;
+  filter: grayscale(25%);
+}
+
+.badge {
+  display: inline-block;
+  inline-size: 135px;
+  block-size: 40px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  &--apple {
+    background-image: url('../images/app-store-badge.svg');
+  }
+
+  &--google {
+    background-image: url('../images/google-play-badge.svg');
+  }
+
+  & + & {
+    margin-inline-start: var(--spacer-2);
+  }
+}

@@ -1,0 +1,47 @@
+@use '../config';
+
+progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inline-size: 100%;
+  block-size: 10px;
+  background: transparent;
+  border: 0;
+  box-shadow: 0 1rem 1rem -1rem hsl(0 0% 0% / 90%);
+  appearance: none;
+
+  @include config.respond('tablet') {
+    block-size: 15px;
+  }
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress::-webkit-progress-value {
+  background:
+    linear-gradient(
+      to right,
+      #7f13f4,
+      calc(100% - (100% / 3 * 2)),
+      #f4107f,
+      calc(100% - (100% / 3 * 1) + 25%),
+      red
+    );
+  background-attachment: scroll;
+}
+
+progress::-moz-progress-bar {
+  background:
+    linear-gradient(
+      to right,
+      #7f13f4,
+      calc(100% - (100% / 3 * 2)),
+      #f4107f,
+      calc(100% - (100% / 3 * 1) + 25%),
+      red
+    );
+  background-attachment: fixed;
+}

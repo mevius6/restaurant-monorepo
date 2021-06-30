@@ -1,0 +1,51 @@
+mixin items(arr)
+  - let num = arr.length
+  each item, i in arr
+    if item.phone || item.email || item.href
+      li
+        +link({
+          base: 'list',
+          phone: item.phone,
+          email: item.email,
+          href: item.href,
+          icon: item.icon,
+          text: item.text,
+          prop: item.prop
+        })
+    else if item.cost
+      -
+        const currency = new Intl.NumberFormat('ru', {
+          style: 'currency',
+          currency: 'RUB',
+          currencyDisplay: 'narrowSymbol', // symbol
+          maximumSignificantDigits: 3
+        })
+      li.price
+        | #{item.text}
+        | #[br]
+        if typeof item.cost !== 'number'
+          | #{currency.format(item.cost[0])} / #{currency.format(item.cost[1])}
+        else
+          | #{currency.format(item.cost)}
+    else
+      if item.icon
+        li&attributes({'data-icon': item.icon})
+          | #{item.text}
+      else
+        li= item.text
+
+mixin list(props)
+  if props.title
+    h4.subhead= props.title
+  if props.ordered
+    ol.list(
+      role="list"
+      reversed= props.reversed
+      start= props.start
+      type= props.type
+    )
+      +items(props.items)
+  else
+    - let classes = []
+    ul.list(role="list" class=classes class=[props.class])
+      +items(props.items)

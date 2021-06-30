@@ -1,0 +1,129 @@
+//- https://wicg.github.io/local-font-access/
+append vars
+  -
+    let pathName = 'fonts'
+    let typeName = 'font'
+    let fontFaces = [
+      {
+        'fullName': 'Nautilus',
+        'varAxes': false
+      },
+      {
+        'fullName': 'ApocLC-Variable',
+        'varAxes': true
+      },
+      {
+        'fullName': 'ApocLC-Italic-Variable',
+        'varAxes': true
+      },
+      {
+        'fullName': 'SuisseScreen-Monitor',
+        'varAxes': false
+      },
+      {
+        'fullName': 'SuisseScreen-MonitorItalic',
+        'varAxes': false
+      },
+      // {
+      //   'fullName': 'SuisseScreen-Medium-WebXL',
+      //   'varAxes': false
+      // },
+    ]
+
+each fontFace in fontFaces
+  - let format = !fontFace.varAxes ? 'woff2' : 'woff2-variations'
+  link(
+    rel="preload"
+    href=`./${pathName}/${fontFace.fullName}.woff2` as=typeName
+    type=`${typeName}/${format}`
+    crossorigin
+  )
+
+//- https://drafts.csswg.org/css-fonts-4/#font-face-src-parsing
+style.
+  @font-face {
+    font-display: swap;
+    font-family: Apoc LC;
+    font-stretch: 100%;
+    font-style: normal;
+    font-synthesis: none;
+    font-weight: 80 145;
+    src:
+      /*
+      local(Apoc LC),
+      local(ApocLC), */
+      url(./fonts/ApocLC-Variable.woff2) format('woff2'),
+      url(./fonts/ApocLC-Variable.woff) format('woff');
+  }
+  @font-face {
+    font-display: swap;
+    font-family: Apoc LC;
+    font-stretch: 100%;
+    font-style: italic;
+    font-synthesis: none;
+    font-weight: 80 145;
+    src:
+      /*
+      local(Apoc LC Italic),
+      local(ApocLCItalic), */
+      url(./fonts/ApocLC-Italic-Variable.woff2) format('woff2'),
+      url(./fonts/ApocLC-Italic-Variable.woff2) format('woff');
+  }
+
+style.
+  @font-face {
+    font-display: swap;
+    font-family: SuisseScreen;
+    font-stretch: 100%;
+    font-style: normal;
+    font-synthesis: none;
+    font-weight: 400;
+    src:
+      local(SuisseScreen Monitor),
+      local(SuisseScreen-Monitor),
+      url(./fonts/SuisseScreen-Monitor.woff2) format('woff2'),
+      url(./fonts/SuisseScreen-Monitor.woff) format('woff');
+    }
+  @font-face {
+    font-display: swap;
+    font-family: SuisseScreen;
+    font-stretch: 100%;
+    font-style: italic;
+    font-synthesis: none;
+    font-weight: 400;
+    src:
+      local(SuisseScreen MonitorItalic),
+      local(SuisseScreen-MonitorItalic),
+      url(./fonts/SuisseScreen-MonitorItalic.woff2) format('woff2'),
+      url(./fonts/SuisseScreen-MonitorItalic.woff) format('woff');
+    }
+//-
+  @font-face {
+    font-display: swap;
+    font-family: SuisseScreen;
+    font-stretch: 100%;
+    font-style: normal;
+    font-synthesis: none;
+    font-weight: 500;
+    src:
+      local(SuisseScreen Medium),
+      local(SuisseScreen-Medium),
+      url(./fonts/SuisseScreen-Medium.woff) format('woff2'),
+      url(./fonts/SuisseScreen-Medium.woff) format('woff');
+    }
+
+style.
+  @font-face {
+    font-display: fallback;
+    font-family: Nautilus Pompilius;
+    font-stretch: 100%;
+    font-style: normal;
+    font-synthesis: none;
+    font-weight: 400;
+    src:
+      local(Nautilus Pompilius),
+      local(Nautilus-Pompilius),
+      url(./fonts/Nautilus.woff2) format('woff2'),
+      url(./fonts/Nautilus.woff) format('woff');
+    unicode-range: U+422,U+425,U+43E,U+440,U+442,U+443,U+447;
+  }

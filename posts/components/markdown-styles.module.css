@@ -1,0 +1,15 @@
+.markdown {
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  font-size: 1.125rem;
+}
+
+.markdown h2 {
+}
+
+.markdown h3 {
+}

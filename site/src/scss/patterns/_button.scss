@@ -1,0 +1,51 @@
+@use '../config';
+
+// https://github.com/primer/css/blob/master/src/buttons/button.scss
+
+button {
+  position: relative;
+  display: inline-flex;
+  min-block-size: 44px; // 2.75rem
+  padding: 1ch 2ex; // 0.5rem
+  overflow: hidden;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--btn-text-color, var(--foreground));
+  background: var(--btn-background, var(--background));
+  border-radius: 2px;
+  box-shadow: 0 8px 24px var(--shadow);
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  align-items: center;
+  justify-content: space-around;
+
+  &:is(:hover, :focus) {
+    text-decoration: none;
+    outline: none;
+  }
+
+  &:active:not([disabled], [role='tab']) {
+    box-shadow: 0 0 0 var(--shadow);
+    transform: translateY(1px);
+  }
+
+  &[class$='cta'] {
+    @include config.directional-clipping(
+      var(--accent),
+      var(--background)
+    );
+
+    box-shadow: var(--accent) 0 0 0 1px inset;
+  }
+
+  &[disabled] {
+    background-image:
+      repeating-linear-gradient(
+        -24deg,
+        transparent,
+        transparent 4px,
+        var(--accent) 0,
+        var(--accent) 5px
+      );
+    box-shadow: var(--accent) 0 0 0 0.5px inset;
+  }
+}

@@ -1,0 +1,51 @@
+@use 'sass:list';
+
+// $direction: 'inline' || 'block'
+@mixin side-fade($colors...) {
+  $color-stops: list.length($colors);
+
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    inline-size: calc(var(--side-fade) * 1px);
+    height: 100%;
+    content: '';
+    background-image: var(--bg-image);
+  }
+
+  &::before {
+    --bg-image:
+      linear-gradient(
+        to left,
+        #{list.nth($colors, 1)},
+        #{list.nth($colors, 2)}
+      );
+
+    left: 0;
+  }
+
+  &::after {
+    --bg-image:
+      linear-gradient(
+        to right,
+        #{list.nth($colors, 1)},
+        #{list.nth($colors, 2)}
+      );
+
+    right: 0;
+  }
+
+  // [data-browser='Safari'] &::after {
+  //   --bg-image:
+  //     -webkit-linear-gradient(
+  //       left,
+  //       #{list.nth($colors, 1)},
+  //       #{list.nth($colors, 2)}
+  //     );
+  // }
+}

@@ -1,0 +1,341 @@
+extends ./pug/page
+
+append pre-connections
+  each host in hosts
+    link(rel="preconnect" href=`https://${host}` crossorigin)
+
+block vars
+  - let page = data.pages.index
+  -
+    const hosts = [
+      'travel-advisor.p.rapidapi.com',
+      'media-cdn.tripadvisor.com',
+      'speller.yandex.net',
+      'graphql.datocms.com',
+      'www.datocms-assets.com',
+      'api.mapbox.com',
+    ]
+  -
+    const articles = [
+      {
+        'headline': 'Наше меню',
+        'lead': 'Любите завтраки целый день? Нам есть чем вас порадовать и удивить! Бесподобные блюда итальянской кухни, шикарные десерты, свежемолотый кофе и ароматные травяные чаи. Меню «Хочу Торт» — это прежде всего авторская кухня, где каждое блюдо уникально. Правила устаналивает сам повар.',
+        'link': 'menu',
+      }, {
+        'headline': 'Атмосфера',
+        'lead': 'Мы ежедневно принимаем сотни гостей. Наше кафе — не только про кухню. Это особая атмосфера: приятные ароматы, тёплые улыбки, детский смех, пастельные тона и уютные мелочи вокруг. Мы берём на себя все заботы и дарим нашим клиентам время на приятное общение за трапезой.',
+        'link': 'atm',
+      }, {
+        'headline': 'Доставка',
+        'lead': 'Мы доставляем свои десерты по всему городу. С радостью готовы организовать ваш праздничный ужин или сладкий завтрак. Заказывайте любимые блюда по телефону: ',
+      }, {
+        'headline': 'О нас',
+        'lead': 'Мы долго шли к созданию кондитерской. И гордимся тем, что создали такой продукт. Мы с особым трепетом подбираем каждого сотрудника в штат, выбираем детали интерьера для наших кафе, и создаем плейлисты для вашего настроения. В разработке каждого блюда и десерта, всегда участвуем лично и отвечаем за качество.',
+        'link': 'about',
+      }
+    ]
+  -
+    // https://schema.org/department
+    const depts = [
+      {
+        'type': 'Restaurant',
+        'name': 'Кафе-кондитерская «ХочуТорт»',
+        'cuisines': [
+          'Итальянская',
+          'Европейская',
+          'Подходит для вегетарианцев'
+        ],
+        'payment': 'Наличные, кредитные карты',
+        'desc': '',
+        'adds': 'ул. Чудинцева, 1',
+        'hours': '10:00–22:00',
+        'phone': '+7 8162 55-58-80',
+        'map': 'https://goo.gl/maps/7qhefPCzbmmKGEaF9',
+        'lat': 58.52222,
+        'lng': 31.26805,
+        'smp': [
+          {
+            'icon': 'vk',
+            'href': 'https://vk.com/hochutortvn'
+          }, {
+            'icon': 'ig',
+            'href': 'https://www.instagram.com/cafehochutort/'
+          }, {
+            'icon': 'ta',
+            'href': 'https://www.tripadvisor.ru/Restaurant_Review-g298502-d13389672-Reviews-Cafe_Confectionery_KhochuTort-Veliky_Novgorod_Novgorod_Oblast_Northwestern_Distr.html'
+          }
+        ]
+      }, {
+        'type': 'Bakery',
+        'name': 'Кондитерская-мастерская «ХочуТорт»',
+        'cuisines': ['Десерты', 'Европейская'],
+        'payment': 'Наличные, кредитные карты',
+        'desc': '',
+        'adds': 'пр. Александра Корсунова, 28',
+        'hours': '10:00–20:00',
+        'phone': '+7 8162 99-88-11',
+        'map': 'https://goo.gl/maps/GwzJG1X2ngqkq3Ey8',
+        'lat': 58.54585,
+        'lng': 31.24086,
+        'smp': [
+          {
+            'icon': 'vk',
+            'href': 'https://vk.com/cake_vn',
+            'prop': 'sameAs'
+          }, {
+            'icon': 'ig',
+            'href': 'https://www.instagram.com/hochutort/',
+            'prop': 'sameAs'
+          }, {
+            'icon': 'ta',
+            'href': 'https://www.tripadvisor.ru/Restaurant_Review-g298502-d13085712-Reviews-KhochuTort-Veliky_Novgorod_Novgorod_Oblast_Northwestern_District.html',
+            'prop': 'sameAs'
+          }
+        ]
+      }, {
+        'type': 'IceCreamShop',
+        'name': 'Островок «ХочуТорт» в ТЦ «Мармелад»',
+        'cuisines': ['Десерты'],
+        'payment': 'Наличные, кредитные карты',
+        'desc': '',
+        'adds': 'ул. Ломоносова, 27',
+        'hours': '10:00–21:00',
+        'phone': '+7 8162 55-57-70',
+        'map': 'https://goo.gl/maps/bxzjZsjAdZXnfd1P6',
+        'lat': 58.5314,
+        'lng': 31.2421,
+      }, {
+        // https://schema.org/CookAction || https://schema.org/FoodEvent
+        'type': 'Bakery',
+        'name': 'Кулинарная студия «Хочу Готовить»',
+        'cuisines': ['Десерты', 'Европейская'],
+        'payment': 'Наличные, кредитные карты',
+        'desc': '',
+        'adds': 'пр. Александра Корсунова, 28',
+        'hours': '10:00–19:00',
+        'phone': '+7 8162 99-85-88',
+        'map': 'https://goo.gl/maps/GwzJG1X2ngqkq3Ey8',
+        'lat': 58.54585,
+        'lng': 31.24086,
+        'smp': [
+          {
+            'icon': 'vk',
+            'href': 'https://vk.com/hochugotovitvn',
+            'prop': 'sameAs'
+          }, {
+            'icon': 'ig',
+            'href': 'https://www.instagram.com/hochugotovitvn/',
+            'prop': 'sameAs'
+          }, {
+            'text': 'Перейти на сайт', // ↗
+            'href': 'https://hochugotovit.com',
+            'prop': 'sameAs'
+          }
+        ]
+      }
+    ]
+  -
+    const count = arr => arr.length
+    const generateNumSeq = num => Array.from({length: num}, (v, i) => i)
+  -
+    const reviewCount = generateNumSeq(10);
+    const postCount = generateNumSeq(3);
+
+block content
+  section(data-id="hero")
+    //- h1.title= data.meta.name
+    .overlay
+    .logo-wrap: include ./images/name.svg
+
+  section(data-id="about" data-layout="staggered")
+    each article, index in articles
+      - let path = `./images/vertical/${index + 1}`
+      .item
+        article.flow
+          .reveal-wrapper
+            h2.headline.reveal(data-splitting="chars")
+              | #{article.headline}
+          p.body(data-splitting="lines")
+            | #{article.lead}
+            if !article.link
+              +link({
+                phone: '+7 (8162) 55-58-80'
+              })(itemprop="telephone")
+              | #[br]
+              | #[em &mdash;&#8202;или&#8202;&mdash;]
+              | #[br]
+              | Через наше приложение &mdash; бесплатная доставка от 700 ₽
+              | #[br]
+              .badges
+                +link({
+                  href: data.meta.links.google,
+                  classes: ['badge', 'badge--google'],
+                  label: 'App Store'
+                })
+                +link({
+                  href: data.meta.links.apple,
+                  classes: ['badge', 'badge--apple'],
+                  label: 'Google Play'
+                })
+          if article.link === 'menu'
+            +cta({
+              base: 'body',
+              type: 'anchor',
+              text: 'Посмотреть',
+              link: article.link
+            })(itemprop="hasMenu")
+          else if article.link
+            +cta({
+              base: 'body',
+              type: 'anchor',
+              text: 'Посмотреть',
+              link: article.link
+            })
+        figure.parallax-effect-wrapper
+          picture.parallax-image-wrapper
+            source(
+              srcset=`${path}.avif 350w, ${path}.avif 589w`
+              type="image/avif"
+            )
+            source(
+              srcset=`${path}.webp 350w, ${path}.webp 589w`
+              type="image/webp"
+            )
+            source(
+              srcset=`${path}.jpg 350w, ${path}.jpg 589w`
+              type="image/jpeg"
+            )
+            img.parallax-image(
+              alt="..."
+              src=`${path}.jpg`
+              width="960" height="1440"
+              loading="lazy"
+              decoding="async"
+            )
+
+  // Истории клиентов || Customer Stories
+  section(data-id="reviews")
+    .reveal-wrapper
+      h2.headline.reveal#ReviewsLabel(data-splitting="chars")
+        | Отзывы посетителей
+    p.overline(
+      itemprop="aggregateRating"
+      itemscope itemtype="https://schema.org/AggregateRating"
+    )
+      | #[span(itemprop="ratingValue")= 4.5] из 5 звёзд —
+      | #[span(itemprop="reviewCount")= 155] отзывов на
+      | #[+link({href: 'https://tripadvisor.com', text: 'Tripadvisor'})]
+    .column-wrapper
+      ul.carousel(
+        style=`--columns: ${count(reviewCount)};`
+        aria-labelledby="#ReviewsLabel"
+      )
+        each i in reviewCount
+          li.item(id=`review${i+1}`)
+            +review({
+              id: `review${i+1}`,
+              date: '',
+              stars: true,
+              title: '',
+              text: '',
+              link: '',
+              username: ''
+            })
+      +paging(reviewCount)
+
+  // Лента блога || Blog feed
+  section.flow(data-id="posts")
+    .reveal-wrapper
+      h2.headline.reveal#FeedLabel(data-splitting="chars")
+        | Наша жизнь
+    ul.card-feed(
+      style={ '--columns': count(postCount) }
+      aria-labelledby="#FeedLabel"
+    )
+      each i in postCount
+        li.item(id=`post${i+1}`)
+          +card({
+            style: 'elevated',
+            view: 'compact',
+            media: true,
+            action: true
+          })
+    +cta({
+      base: 'card-feed',
+      type: 'anchor',
+      text: 'Больше новостей!',
+      link: 'https://blog.hochutort.com/'
+    })(target="_blank" rel="noopener")
+
+  section(data-id="map")
+    #map
+    ol.extra-controls
+      each dept, i in depts
+        - let v = `loc${i+1}`
+        if i !== 0
+          li.extra-controls__item(
+            itemprop="department"
+            itemscope itemtype=`https://schema.org/${dept.type}`
+          )
+            input(type="radio" id= v name="location" data-hidden)
+            label(for= v)
+              span(itemprop="name")= dept.name
+              //- span(itemprop="description")= dept.desc
+              each cuisine in dept.cuisines
+                meta(itemprop="servesCuisine" content= cuisine)
+              meta(itemprop="paymentAccepted" content= dept.payment)
+              meta(itemprop="priceRange" content="₽₽–₽₽₽")
+              img(
+                src='./images/interior.jpg'
+                alt=`Интерьер ${dept.name}`
+                itemprop="image"
+                width="900" height="600"
+                loading="lazy"
+                decoding="async"
+                data-hidden
+              )
+              span(
+                itemprop="address"
+                itemscope itemtype="https://schema.org/PostalAddress"
+              )
+                meta(itemprop="addressLocality" content="Великий Новгород")
+                span(itemprop="streetAddress")= dept.adds
+              span(
+                itemprop="geo"
+                itemscope itemtype="https://schema.org/GeoCoordinates"
+              )
+                meta(itemprop="latitude" content= dept.lat)
+                meta(itemprop="longitude" content= dept.lng)
+              time(itemprop="openingHours" datetime=`Mo-Su ${dept.hours}`)
+                | #{dept.hours}
+              +link({
+                phone: dept.phone
+              })(itemprop="telephone")
+              if dept.smp
+                +list({
+                  class: 'social',
+                  items: dept.smp,
+                  ordered: false
+                })
+        else
+          li.extra-controls__item
+            input(type="radio" id= v name="location" data-hidden)&attributes({
+              'checked': i === 0
+            })
+            label(for= v)
+              span= dept.name
+              span= dept.adds
+              time(datetime="Mo-Fr 10:00-21:00")
+                | Пн–Пт 10&colon;00–21&colon;00
+              time(datetime="Sa-Su 10:00-22:00")
+                | Сб–Вс 10&colon;00–22&colon;00
+              +link({
+                phone: dept.phone
+              })
+              +list({
+                class: 'social',
+                items: dept.smp,
+                ordered: false
+              })
+
+block scripts

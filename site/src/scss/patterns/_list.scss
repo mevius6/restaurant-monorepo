@@ -1,0 +1,55 @@
+@use '../config';
+
+// https://moderncss.dev/totally-custom-list-styles/
+ol,
+ul {
+  display: grid;
+  gap: var(--list-gap, var(--gutter));
+}
+
+li {
+  display: grid;
+  align-items: start;
+  // line-height: var(--list-item-lh, 1.25);
+  gap: var(--list-item-gap, 1.75em);
+}
+
+ul {
+  li::before { content: var(--attr); }
+
+  li[data-icon] {
+    --attr: attr(data-icon);
+
+    grid-template-columns: 0 1fr;
+    padding-inline-start: 0.625em;
+
+    @include config.respond('tablet') {
+      & {
+        padding-inline-start: 1.25em;
+      }
+    }
+
+    &::before {
+      font-size: 1.25em; // 1.5em
+      line-height: 1.1;
+    }
+  }
+}
+
+ol {
+  counter-reset: orderedlist;
+
+  & > li::before {
+    inline-size: 1.5rem;
+    padding-block-start: 0.25rem;
+    font-size: 1.25em;
+    line-height: 0.75;
+    color: var(--foreground);
+    text-align: center;
+    content: counter(orderedlist);
+    counter-increment: orderedlist;
+    background-color: var(--li-bg, hvar(--accent));
+    border-radius: 0.25em;
+    font-feature-settings: 'tnum' 1;
+  }
+}

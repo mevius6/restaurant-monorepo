@@ -1,0 +1,36 @@
+@use '../config';
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 4vw;
+}
+
+.hero {
+  @include config.flow-space(4vw);
+
+  margin-block-end: 10vmax;
+
+  &__text {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 10vmax;
+    row-gap: 1rem;
+
+    & > div {
+      @include config.flow-space();
+    }
+  }
+}
+
+@include config.respond('tablet') {
+  .intro {
+    flex-direction: row;
+  }
+
+  .hero__text {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

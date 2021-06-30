@@ -1,0 +1,66 @@
+append vars
+  -
+    const week = [
+      {
+        'name': ['Понедельник', 'Monday'],
+        'hours': [10, 21]
+      }, {
+        'name': ['Вторник', 'Tuesday'],
+        'hours': [10, 21]
+      }, {
+        'name': ['Среда', 'Wednesday'],
+        'hours': [10, 21]
+      }, {
+        'name': ['Четверг', 'Thursday'],
+        'hours': [10, 21]
+      }, {
+        'name': ['Пятница', 'Friday'],
+        'hours': [10, 21]
+      }, {
+        'name': ['Суббота', 'Saturday'],
+        'hours': [10, 22]
+      }, {
+        'name': ['Воскресенье', 'Sunday'],
+        'hours': [10, 22]
+      }
+    ]
+
+//- https://schema.org/docs/datamodel.html#mainEntityBackground
+a(itemprop="mainEntityOfPage" href= data.meta.domain data-hidden)
+  //- link(itemprop="url" href= data.meta.domain)
+  img(
+    itemprop="image"
+    src="./images/interior.jpg"
+    alt="Интерьер кафе-кондитерской «ХочуТорт»"
+    width="900" height="600"
+    loading="lazy"
+  )
+  h1(itemprop="name")
+    | Кафе-кондитерская «ХочуТорт»
+  span(itemprop="description")= page.description
+  span(itemprop="servesCuisine") Итальянская
+  span(itemprop="servesCuisine") Европейская
+  span(itemprop="servesCuisine") Подходит для вегетарианцев
+  span(itemprop="paymentAccepted") Наличные, кредитные карты
+  span(itemprop="priceRange") ₽₽₽
+  //- span(itemprop="priceRange") 60–600 ₽
+  span(itemprop="telephone") +78162555880
+  span(itemprop="address") ул. Чудинцева, 1
+  span(
+    itemprop="geo"
+    itemscope itemtype="https://schema.org/GeoCoordinates"
+  )
+    meta(itemprop="latitude" content="58.54585")
+    meta(itemprop="longitude" content="31.24086")
+  each day, i in week
+    span(
+      itemprop="openingHoursSpecification"
+      itemscope itemtype="https://schema.org/OpeningHoursSpecification"
+    )
+      a(itemprop="dayOfWeek" href=`https://schema.org/${day.name[1]}`)
+        | #{day.name[0]}:
+        time(itemprop="opens" content=`${day.hours[0]}:00:00`)
+          | #{day.hours[0]}:00 AM
+        | –
+        time(itemprop="closes" content=`${day.hours[1]}:00:00`)
+          | #{day.hours[1]}:00 PM

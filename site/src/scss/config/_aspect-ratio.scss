@@ -1,0 +1,27 @@
+// https://hankchizljaw.com/wrote/creating-an-aspect-ratio-css-utility/
+// https://css-tricks.com/aspect-ratio-boxes/
+// https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin/
+// https://drafts.csswg.org/css-sizing-4/#aspect-ratio
+// https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
+// https://github.com/WICG/intrinsicsize-attribute/issues/16#issuecomment-503245998
+
+@mixin aspect-ratio($ar: '1/1') {
+  position: relative;
+  display: block;
+  // 16:9 ~ 56.25%
+  padding-block-start: calc(var(--aspect-ratio, #{$ar}) * 100%);
+  // padding-block-end: calc(100% / (var(--aspect-ratio, #{$ar})));
+
+  @supports (aspect-ratio: 1/1) {
+    // aspect-ratio: attr(width) / attr(height);
+  }
+
+  & > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+}

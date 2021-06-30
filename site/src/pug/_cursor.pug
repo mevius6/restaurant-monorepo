@@ -1,0 +1,27 @@
+-
+  let fullSize = '140',
+      halfSize = fullSize / 2;
+
+svg.cursor(
+  width= fullSize height= fullSize viewBox=`0 0 ${fullSize} ${fullSize}`
+  version="1.2" xmlns="http://www.w3.org/2000/svg"
+)
+  defs
+    filter#Distortion(
+      filterUnits="objectBoundingBox"
+      x="-50%" y="-50%" width="200%" height="200%"
+    )
+      feTurbulence(
+        type="fractalNoise"
+        baseFrequency="0"
+        numOctaves="10"
+        result="warp"
+      )
+      feDisplacementMap(
+        xChannelSelector="R"
+        yChannelSelector="G"
+        scale="60"
+        in="SourceGraphic"
+        in2="warp"
+      )
+  circle.cursor__inner(cx= halfSize cy= halfSize r="60")

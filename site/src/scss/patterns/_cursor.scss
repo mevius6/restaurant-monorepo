@@ -1,0 +1,22 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: none;
+  color: var(--cursor-color, inherit);
+  pointer-events: none;
+  opacity: var(--cursor-alpha, 0);
+  // transform: translate3d(var(--tx, 0), var(--ty, 0), var(--tz, 0));
+
+  &__inner {
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: var(--cursor-width, 1px);
+    filter: var(--cursor-svg-filter, none);
+  }
+
+  @media (hover: hover) {
+    & { display: block; }
+  }
+}

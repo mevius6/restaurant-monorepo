@@ -1,0 +1,49 @@
+@use '../config';
+
+.parallax {
+  &-effect-wrapper {
+    @include config.aspect-ratio('2/3'); // ar mixin
+
+    // position: relative;
+    block-size: 100%;
+    overflow: hidden;
+  }
+
+  &-image-wrapper {
+    // position: absolute;
+    top: var(--offset, 50%); // rewrite ar mixin from 0
+    // left: 0;
+    // inline-size: 100%;
+    block-size: 100vh; // rewrite ar mixin from 100%
+    transform: translateY(-50%);
+    will-change: transform;
+
+    [data-browser='Firefox'] & {
+      --offset: -20vh;
+    }
+  }
+
+  &-image {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  @include config.respond('tablet') {
+    &-effect-wrapper {
+      padding-block-start: 0; // rewrite ar mixin
+    }
+
+    &-image-wrapper {
+      block-size: 140vh;
+    }
+  }
+
+  &-bg {
+    height: 100%;
+    // background-image: url('../images/1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+}

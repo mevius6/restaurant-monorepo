@@ -1,0 +1,52 @@
+-
+  const social = [
+    {
+      'icon': 'vk',
+      'href': 'https://vk.com/hochutortvn',
+      'prop': 'sameAs'
+    }, {
+      'icon': 'ig',
+      'href': 'https://www.instagram.com/cafehochutort/',
+      'prop': 'sameAs'
+    }, {
+      'icon': 'ta',
+      'href': 'https://www.tripadvisor.com/Restaurant_Review-g298502-d13389672-Reviews-Cafe_Confectionery_KhochuTort-Veliky_Novgorod_Novgorod_Oblast_Northwestern_Distr.html',
+      'prop': 'sameAs'
+    }
+  ]
+-
+  const contacts = [
+    {
+      'icon': 'tel',
+      'phone': '+7 8162 99-88-11'
+    }, {
+      'icon': 'at',
+      'email': {
+        'to': data.meta.email,
+        'subject': 'Хочу торт',
+        'body': 'Добрый день!'
+      }
+    }
+  ]
+
+footer.page__footer(itemscope itemtype="https://schema.org/WPFooter")
+  - let y = new Date().getFullYear()
+  p
+    span.overline.copr
+      | &copy; #[time(datetime= y itemprop="copyrightYear")= y]
+    span.logo= data.meta.brand
+
+  +list({
+    class: 'social',
+    items: social,
+    ordered: false
+  })
+
+  +list({
+    class: 'contacts',
+    items: contacts,
+    ordered: false
+  })
+
+  span.byline
+    | Сделано в «RMMR Studio»

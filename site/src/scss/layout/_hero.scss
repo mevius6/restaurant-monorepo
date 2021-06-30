@@ -1,0 +1,106 @@
+@use '../config';
+
+@keyframes fadeOut {
+  to { stroke-width: 0; }
+}
+
+// @keyframes slideIn {
+//   0% { transform: translateX(0); }
+//   25% { transform: translateX(-25%) skewX(-15deg); }
+//   100% { transform: translateX(-100%) skewX(0); }
+// }
+
+[data-id='hero'] {
+  --image-overlay:
+    linear-gradient(
+      0deg,
+      hsl(0 0% 0% / 0.3),
+      hsl(0 0% 0% / 0.3)
+    );
+
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .webp & {
+    background-image: var(--image-overlay), url('../images/hero/1.webp');
+  }
+
+  .no-webp & {
+    background-image: var(--image-overlay), url('../images/hero/1.jpg');
+  }
+
+  [data-theme-style='dark'] & {
+    --image-overlay:
+      linear-gradient(
+        0deg,
+        hsl(0 0% 0% / 0),
+        hsl(0 0% 0% / 0)
+      );
+    background-color: hsl(0 0% 0% / 0);
+  }
+
+  .logo-wrap {
+    z-index: 1;
+    inline-size: calc(100vw - 2rem);
+    pointer-events: none;
+
+    @include config.respond('tablet') {
+      max-inline-size: var(--container-md);
+    }
+
+    & > svg { inline-size: 100%; }
+
+    .char {
+      --char-total: 8;
+      --seq1-duration: 2500ms;
+      --seq2-duration: calc(var(--duration) * var(--char-total));
+      --duration: 100ms;
+      --delay: calc(var(--i, 1) * var(--duration) + var(--interval));
+      --interval: calc(var(--seq1-duration) - var(--seq2-duration));
+
+      color: var(--background);
+      stroke: var(--accent);
+      stroke-width: var(--contour, 1px);
+      transition-delay: 0s, var(--delay);
+      transition-timing-function: linear, ease-in-out;
+      transition-duration: var(--seq1-duration), var(--seq2-duration);
+      transition-property: stroke-dashoffset, stroke-width;
+      stroke-dasharray: var(--pattern, 1000);
+      stroke-dashoffset: var(--distance, 1000);
+
+      @for $i from 2 through 8 {
+        &:nth-child(#{$i}) { --i: #{$i}; }
+      }
+
+      .page--loaded & {
+        --distance: 0;
+        --contour: 0;
+
+        // seq w/o transition-delay
+        // animation: fadeOut 700ms var(--easing) var(--delay) both;
+      }
+    }
+  }
+
+  .overlay {
+    overflow: hidden;
+    background-color: var(--background);
+    opacity: var(--a);
+    transition: opacity 800ms 2500ms ease-in-out;
+
+    .page--loaded & {
+      --a: 0;
+      overflow: auto;
+    }
+
+    // .page--loaded & {
+    //   transform-origin: 0 50%;
+    //   animation-name: slideIn;
+    //   animation-duration: 300ms;
+    //   animation-fill-mode: both;
+    //   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    // }
+  }
+}

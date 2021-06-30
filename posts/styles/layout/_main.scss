@@ -1,0 +1,19 @@
+.main-wrapper {
+  min-height: 100vh;
+}
+
+.container {
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  max-width: 1500px;
+}
+
+.divider {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  margin-block-start: 7rem;
+  margin-block-end: 6rem;
+  border-top-width: 0.5px;
+  border-color: #eaeaea;
+}

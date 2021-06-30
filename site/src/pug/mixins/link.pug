@@ -1,0 +1,48 @@
+//- https://dequeuniversity.com/rules/axe/3.3/link-name
+//- phone || email || plain
+mixin link(props)
+  if props.phone
+    - let tel = props.phone.replace(/[^\d+]/g, '')
+    a(
+      class= props.classes || ''
+      href=`tel:${tel}`
+      aria-label=`call to ${props.phone}`
+    )
+      if props.icon
+        span(data-icon= props.icon)
+      else if props.text
+        span
+          | #{props.text} #{props.phone}
+      else
+        //- [itemprop="telephone"]
+        span&attributes(attributes)
+          | #{props.phone}
+
+  else if props.email
+    -
+      let field1 = props.email.subject ? `?subject=${props.email.subject}` : ''
+      let field2 = props.email.body ? `&body=${props.email.body}` : ''
+    a(
+      class= props.classes || ''
+      href=`mailto:${props.email.to}${field1}${field1 ? field2 : ''}`
+      aria-label=`email to ${props.email.to}`
+    )
+      if props.icon
+        span(data-icon= props.icon)
+        meta(itemprop="email" content= props.email.to)
+      else
+        span(itemprop="email")
+          | #{props.email.to}
+
+  else
+    a(
+      class= props.classes || ''
+      href= props.href
+      target="_blank" rel="noopener noreferrer"
+      aria-label= props.label || props.text ? props.text : props.icon
+    )&attributes({itemprop: props.prop})
+      if props.icon
+        span(data-icon= props.icon)
+      else if props.text
+        span&attributes(attributes)
+          | #{props.text}

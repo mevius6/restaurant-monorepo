@@ -1,0 +1,201 @@
+@use '../config';
+
+// ? https://chjweb.hashnode.dev/skeleton-loader-in-pure-css
+
+.card {
+  $card: &;
+  // Макет
+  $compact: #{&}--compact;
+  $article: #{&}--article;
+  // Стиль
+  $elevated: #{&}--elevated;
+  $outlined: #{&}--outlined;
+
+  position: relative;
+  min-inline-size: 20ch;
+  max-inline-size: 60ch;
+  // border-radius: 0.5rem;
+  border-radius: 2px;
+  contain: layout;
+  will-change: transform;
+
+  &--compact {
+    // inline-size: clamp(30ch, 50%, 60ch);
+    inline-size: 100%;
+    overflow-y: hidden;
+
+    [class='no-js'] & {
+      &:hover,
+      &:focus {
+        .card__text-wrapper,
+        .card__headline {
+          transform: translate3d(0, 0, 0);
+        }
+        .card__body { opacity: 1; }
+      }
+    }
+  }
+
+  &--elevated {
+    overflow: hidden;
+    background-color: var(--background);
+    box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
+  }
+
+  &--outlined {
+    padding: 0;
+    overflow: visible;
+
+    &::before {
+      position: absolute;
+      top: calc(0.5rem * -2);
+      left: calc(0.5rem * -2);
+      z-index: -1;
+      inline-size: 100%;
+      block-size: 100%;
+      content: '';
+      background-image:
+        repeating-linear-gradient(
+          -24deg,
+          transparent,
+          transparent 4px,
+          var(--accent) 0,
+          var(--accent) 5px
+        );
+      border-radius: 0.5rem;
+      box-shadow: var(--accent) 0 0 0 1px inset;
+    }
+  }
+
+  &__container {
+    display: flex;
+    padding: var(--gutter);
+    flex-flow: column wrap;
+
+    // https://caniuse.com/#feat=flexbox-gap
+    // https://github.com/w3c/csswg-drafts/issues/3559
+    & > * + * {
+      --gutter: 1rem;
+      margin-block-start: var(--gutter) var(--remove);
+    }
+
+    #{$compact} & {
+      --gutter: 0;
+
+      & > * + * { --remove: x; }
+    }
+
+    #{$outlined} & {
+      background-color: var(--background);
+      border-radius: 0.5rem;
+      box-shadow: var(--foreground) 0 0 0 1px inset;
+    }
+  }
+
+  &__image-wrapper {
+    @include config.aspect-ratio();
+
+    min-height: 100%;
+    overflow: hidden;
+    // LQIP
+    background-size: cover;
+  }
+
+  &__image {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    will-change: transform;
+  }
+
+  &__text-wrapper {
+    // order: 1;
+    display: flex;
+    max-inline-size: 100%;
+    flex-direction: column;
+
+    & > * + * { margin-block-start: var(--gutter); }
+
+    #{$compact} & {
+      position: absolute;
+      top: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      padding-inline: var(--gutter);
+      background-color: var(--background);
+      justify-content: start;
+
+      [class='no-js'] & {
+        transition: transform 300ms;
+        transform: translate3d(0, 100%, 0);
+      }
+    }
+  }
+
+  &__header {
+    overflow-x: hidden;
+
+    #{$compact} & {
+      margin-inline: calc(-1 * var(--gutter));
+      overflow: visible;
+    }
+  }
+
+  &__headline {
+    #{$compact} & {
+      @include config.line-clamp(1);
+
+      display: block;
+      min-inline-size: 100%;
+      padding: var(--gutter);
+      color: var(--background);
+      background:
+        linear-gradient(
+          90deg,
+          var(--accent) 0%,
+          hsl(var(--warm-gray-2) / 0.4) 100%
+        );
+      backdrop-filter: blur(23px); // 35px
+
+      [class='no-js'] & {
+        transition: transform 300ms;
+        transform: translate3d(0, -100%, 0);
+      }
+    }
+  }
+
+  &__body {
+    flex: 1 0 auto;
+
+    #{$compact} & {
+      @include config.line-clamp(3);
+
+      hyphens: manual;
+      opacity: 0;
+      flex-grow: 0;
+
+      [class='no-js'] & {
+        transition: opacity 500ms 100ms;
+      }
+    }
+  }
+
+  &__date {
+    --weight-axis: 96;
+
+    display: block;
+    inline-size: 100%;
+    font-style: italic;
+    text-align: right;
+    // text-transform: capitalize;
+    opacity: 0.75;
+
+    // &::before { content: attr(datetime); }
+  }
+
+  &__footer {
+    @include config.flow-space(1rem);
+  }
+
+  // &__cta {}
+}

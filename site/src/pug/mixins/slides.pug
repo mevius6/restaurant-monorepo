@@ -1,0 +1,61 @@
+mixin slides(props)
+  - let num = props.data.length
+  - let attrs = {}
+  - attrs.class = [props.name]
+
+  - let columns = props.slideCols
+  - let path = 'images/' + props.imagePath
+
+  .slides(class={'slides--2columns': columns === 2})&attributes(attrs)
+    .slides__container
+      each item, i in props.data
+        .slides__slide(
+          class={'bg-image': columns === 1}
+          style={'--columns': columns}
+        )
+          if columns === 2
+            picture.slides__image
+              //- source(type="image/avif" srcset=`${path}/${i+1}.avif` )
+              source(type="image/webp" srcset=`${path}/${i+1}.webp`)
+              source(type="image/jpeg" srcset=`${path}/${i+1}.jpg`)
+              img(
+                src=`${path}/${i+1}.jpg`
+                alt=""
+                width="720"
+                height="1080"
+                loading="lazy"
+                decoding="async"
+              )
+          article.slides__text
+            h2.headline
+              | #{item.title}
+            if Array.isArray(item.field)
+              each subitem in item.field
+                if subitem.lead
+                  p.body
+                    | #{subitem.lead}
+                if subitem.listTitle
+                  +list({
+                    title: subitem.listTitle,
+                    items: subitem.listItems,
+                    ordered: false
+                  })
+                if subitem.listItems
+                  +list({
+                    items: subitem.listItems,
+                    ordered: false
+                  })
+                else
+                  p.body
+                    | #{subitem}
+            else
+              p.body
+                | #{item.field}
+    if props.count
+      .slides__counter
+        .slides__counter-current.num= 1
+        .slides__counter-max= num
+    .slides__control
+      //- &larr; &rarr;
+      button(aria-label="Предыдущий").prev
+      button(aria-label="Следующий").next
