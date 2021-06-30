@@ -57,10 +57,10 @@ a(itemprop="mainEntityOfPage" href= data.meta.domain data-hidden)
       itemprop="openingHoursSpecification"
       itemscope itemtype="https://schema.org/OpeningHoursSpecification"
     )
-      a(itemprop="dayOfWeek" href=`https://schema.org/${day.name[1]}`)
-        | #{day.name[0]}:
-        time(itemprop="opens" content=`${day.hours[0]}:00:00`)
-          | #{day.hours[0]}:00 AM
-        | –
-        time(itemprop="closes" content=`${day.hours[1]}:00:00`)
-          | #{day.hours[1]}:00 PM
+      link(itemprop="dayOfWeek" href=`https://schema.org/${day.name[1]}`)
+      | #{day.name[0]}:
+      time(itemprop="opens" content=`${day.hours[0]}:00:00`)
+        | #{day.hours[0]}:00 AM
+      | –
+      time(itemprop="closes" content=`${day.hours[1]}:00:00`)
+        | #{day.hours[1]}:00 PM
