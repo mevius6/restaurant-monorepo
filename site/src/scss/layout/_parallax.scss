@@ -2,7 +2,7 @@
 
 .parallax {
   &-effect-wrapper {
-    @include config.aspect-ratio('2/3'); // ar mixin
+    @include config.aspect-ratio('2/3');
 
     // position: relative;
     block-size: 100%;
@@ -11,10 +11,10 @@
 
   &-image-wrapper {
     // position: absolute;
-    top: var(--offset, 50%); // rewrite ar mixin from 0
+    top: var(--offset, 50%); // override mixin from 0
     // left: 0;
     // inline-size: 100%;
-    block-size: 100vh; // rewrite ar mixin from 100%
+    block-size: 100vh; // override mixin from 100%
     transform: translateY(-50%);
     will-change: transform;
 
@@ -30,7 +30,7 @@
 
   @include config.respond('tablet') {
     &-effect-wrapper {
-      padding-block-start: 0; // rewrite ar mixin
+      padding-block-start: 0; // override mixin
     }
 
     &-image-wrapper {

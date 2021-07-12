@@ -1,0 +1,35 @@
+extends ./pug/page
+
+block vars
+  - let page = data.pages.gallery
+  - const generateNumSeq = num => Array.from({length: num}, (v, i) => i)
+  - const imagesCount = generateNumSeq(57)
+  - const imagesPath = 'images/grid'
+
+block content
+  .container.grid.grid--masonry
+    each num in imagesCount
+      - let src = `${imagesPath}/${num + 1}`
+      figure.grid__item
+        picture
+          source(
+            srcset=`${src}.avif 350w, ${src}.avif 589w`
+            type="image/avif"
+          )
+          source(
+            srcset=`${src}.webp 350w, ${src}.webp 589w`
+            type="image/webp"
+          )
+          source(
+            srcset=`${src}.jpg 350w, ${src}.jpg 589w`
+            type="image/jpeg"
+          )
+          img(
+            alt="..."
+            src=`${src}.jpg`
+            width="960" height="1440"
+            loading="lazy"
+            decoding="async"
+          )
+
+block scripts

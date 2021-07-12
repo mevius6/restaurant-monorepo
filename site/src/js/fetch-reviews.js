@@ -4,7 +4,7 @@ import { asyncFetchJSON } from './utils';
 
 const HOST = 'travel-advisor.p.rapidapi.com';
 const LOC_ID = 13389672;
-const URL = `https://${HOST}/reviews/list?location_id=${LOC_ID}&limit=10&currency=RUB&lang=ru`;
+const API_URL = `https://${HOST}/reviews/list?location_id=${LOC_ID}&limit=10&currency=RUB&lang=ru`;
 
 const RAPID_API = {
   method: 'GET',
@@ -15,7 +15,7 @@ const RAPID_API = {
 }
 
 export const getLatestReviews = async () => {
-  const json = await asyncFetchJSON(URL, RAPID_API);
+  const json = await asyncFetchJSON(API_URL, RAPID_API);
 
   return json;
 };

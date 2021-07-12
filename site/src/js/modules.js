@@ -48,6 +48,12 @@ const doc = document,
   ) {
     const panorama = await import('./panorama.js');
   }
+  if (
+    parsedUrl.pathname === '/gallery' ||
+    parsedUrl.pathname === '/gallery.html'
+  ) {
+    const masonry = await import('./masonry-fallback.js');
+  }
 
   loadNav();
 })();
