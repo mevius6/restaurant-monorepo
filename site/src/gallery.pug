@@ -3,13 +3,13 @@ extends ./pug/page
 block vars
   - let page = data.pages.gallery
   - const generateNumSeq = num => Array.from({length: num}, (v, i) => i)
-  - const imagesCount = generateNumSeq(57)
-  - const imagesPath = 'images/grid'
+  - const imageCount = generateNumSeq(57)
+  - const imagePath = 'images/grid'
 
 block content
-  .container.grid.grid--masonry
-    each num in imagesCount
-      - let src = `${imagesPath}/${num + 1}`
+  .grid.grid--masonry
+    each num in imageCount
+      - let src = `${imagePath}/${num + 1}`
       figure.grid__item
         picture
           source(
