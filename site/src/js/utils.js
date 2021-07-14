@@ -111,18 +111,13 @@ const selectAll = (expr, con) => {
   return Array.prototype.slice.call((con || document).querySelectorAll(expr));
 };
 
-const findByData = (expr, con) =>
-  [...document.querySelectorAll(`[data-${con}]`)].find(
-    (elem) => elem.dataset[con] === expr
-  );
+const findByData = (expr, con) => selectAll(`[data-${con}]`).find(
+  (elem) => elem.dataset[con] === expr
+);
 
-const createNode = (expr) => {
-  return document.createElement(expr);
-};
+const createNode = (expr) => document.createElement(expr);
 
-const appendNode = (expr, con) => {
-  expr.appendChild(con);
-};
+const appendNode = (expr, con) => expr.appendChild(con);
 
 const createNodeWithClass = (expr, con) => {
   const elem = document.createElement(expr);
