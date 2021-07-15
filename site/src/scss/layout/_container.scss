@@ -98,6 +98,8 @@ section {
     @include config.respond('tablet') {
       --align-items: safe;
     }
+
+    > .cta { margin-block-end: var(--spacer-4); }
   }
 
   &[data-id='panorama'] {

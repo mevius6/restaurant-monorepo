@@ -3,7 +3,6 @@
 
 const FILE_NAME = 'menu.pdf';
 const FILE_PATH = `https://hochutort.com/${FILE_NAME}`;
-// const FILE_URL = 'https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:bfa119bd-9754-4f0c-99b6-db9a6d25921c';
 
 // const headers = [{ key: '', value: '' }];
 
