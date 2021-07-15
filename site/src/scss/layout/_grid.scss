@@ -30,6 +30,8 @@ $s: 0.5em;
   @supports not (grid-template-rows: masonry) {
     display: block;
     columns: 20em;
+    max-inline-size: var(--container-lg);
+    margin: 0 auto;
 
     figure {
       margin-block-end: $s;
