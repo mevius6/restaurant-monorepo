@@ -1,8 +1,11 @@
 // https://www.adobe.io/apis/documentcloud/dcsdk/docs.html
+// https://github.com/adobe/pdf-embed-api-samples/blob/master/Lightbox%20Embed%20Mode/index.js
 
-const FILE_NAME = 'hochutort-menu.pdf';
-// const FILE_URL = `https://static.raymondcamden.com/enclosures/${FILE_NAME}`;
-const FILE_URL = 'https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:bfa119bd-9754-4f0c-99b6-db9a6d25921c';
+const FILE_NAME = 'menu.pdf';
+const FILE_PATH = `https://hochutort.com/${FILE_NAME}`;
+// const FILE_URL = 'https://documentcloud.adobe.com/link/review?uri=urn:aaid:scds:US:bfa119bd-9754-4f0c-99b6-db9a6d25921c';
+
+// const headers = [{ key: '', value: '' }];
 
 const viewerConfig = {
   showAnnotationTools: true,
@@ -28,11 +31,17 @@ function enablePDF() {
 }
 
 function displayPDF() {
-  console.log('Lets do some AWESOME PDF stuff!');
-
-  let adobeDCView = new AdobeDC.View({ clientId: process.env.ADOBE_API_KEY });
+  let adobeDCView = new AdobeDC.View({
+    clientId: process.env.ADOBE_API_KEY,
+    locale: "ru-RU",
+  });
   adobeDCView.previewFile({
-    content: { location: { url: FILE_URL } },
+    content: {
+      location: {
+        url: FILE_PATH,
+        // header: (headers.key !== '') ? headers : '',
+      }
+    },
     metaData: { fileName: FILE_NAME },
   }, viewerConfig);
 }
