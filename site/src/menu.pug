@@ -502,7 +502,6 @@ block vars
         'field': 'Оcвежающие напитки и летние блюда.'
       }
     ]
-
 //- http://linter.structured-data.org/examples/schema.org/Menu/
 block content
   section(data-id="slideshow")
@@ -516,5 +515,10 @@ block content
       name: 'tabs--1',
       data: menu
     })
+    +cta({
+      type: 'button',
+      text: 'Посмотреть PDF'
+    })(id="showPDF")
 
 block scripts
+  script(src="https://documentcloud.adobe.com/view-sdk/main.js")

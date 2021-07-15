@@ -41,6 +41,7 @@ const doc = document,
   ) {
     const slideshow = await import('./slideshow.js');
     const tabs = await import('./tabs.js');
+    const pdf = await import('./pdf-viewer');
   }
   if (
     parsedUrl.pathname === '/atm' ||
