@@ -22,8 +22,18 @@ $s: 0.5em;
     max-height: inherit;
     border-radius: 2px;
 
-    @supports not (grid-template-rows: masonry) {
-      & { aspect-ratio: 3 / 4; }
+    // @supports not (grid-template-rows: masonry) {
+    //   aspect-ratio: 3 / 4;
+    // }
+  }
+
+  @supports not (grid-template-rows: masonry) {
+    display: block;
+    columns: 20em;
+
+    figure {
+      margin-block-end: $s;
+      break-inside: avoid;
     }
   }
 }
