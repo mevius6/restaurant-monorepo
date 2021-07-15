@@ -67,11 +67,11 @@
       transition-timing-function: linear, ease-in-out;
       transition-duration: var(--seq1-duration), var(--seq2-duration);
       transition-property: stroke-dashoffset, stroke-width;
-      stroke-dasharray: var(--pattern, 2000);
-      stroke-dashoffset: var(--distance, 2000);
+      stroke-dasharray: var(--pattern, 1500);
+      stroke-dashoffset: var(--distance, 1500);
 
       @for $i from 2 through 8 {
-        &:nth-child(#{$i}) { --i: #{$i}; }
+        &:nth-of-type(#{$i}) { --i: #{$i}; }
       }
 
       .page--loaded & {
