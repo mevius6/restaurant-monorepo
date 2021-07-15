@@ -9,7 +9,7 @@ if (grids.length && getComputedStyle(grids[0]).gridTemplateRows !== 'masonry') {
       (c) => c.nodeType === 1 && +getComputedStyle(c).gridColumnEnd !== -1
     ),
     columnCount: 0,
-    gap: parseFloat(getComputedStyle(grid).gridRowGap),
+    gap: parseFloat(getComputedStyle(grid).rowGap),
   }));
 
   const layout = () => {
@@ -37,4 +37,8 @@ if (grids.length && getComputedStyle(grids[0]).gridTemplateRows !== 'masonry') {
     layout();
     window.addEventListener('resize', layout, false);
   }, false);
+
+  if ('loading' in HTMLImageElement.prototype) {
+    // 🐛
+  }
 }

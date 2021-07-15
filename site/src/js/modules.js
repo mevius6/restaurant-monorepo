@@ -52,7 +52,7 @@ const doc = document,
     parsedUrl.pathname === '/gallery' ||
     parsedUrl.pathname === '/gallery.html'
   ) {
-    const masonry = await import('./masonry-fallback.js');
+    // const masonry = await import('./masonry-fallback.js');
   }
 
   loadNav();

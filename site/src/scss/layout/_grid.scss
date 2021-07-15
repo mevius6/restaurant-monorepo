@@ -14,15 +14,17 @@ $s: 0.5em;
 
   // > :first-child {
   //   grid-column: 1 / -1;
-
   //   picture { max-block-size: 50vh; }
   // }
 
   img {
     width: 100%;
     max-height: inherit;
-    // border-radius: 20px;
-    // box-shadow: 2px 20px 48px rgba(#000, 0.3);
+    border-radius: 2px;
+
+    @supports not (grid-template-rows: masonry) {
+      & { aspect-ratio: 3 / 4; }
+    }
   }
 }
 
