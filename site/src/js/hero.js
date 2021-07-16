@@ -6,6 +6,7 @@ import heroImage1_mod from 'url:../images/hero/1.webp';
 import heroImage2_mod from 'url:../images/hero/2.webp';
 import heroImage3_mod from 'url:../images/hero/3.webp';
 
+const webp = document.documentElement.classList.contains('webp');
 const heroEl = hero;
 const heroImages = {
   old: [heroImage1, heroImage2, heroImage3],
@@ -13,11 +14,11 @@ const heroImages = {
 };
 
 const setRandomImage = () => {
-  let randomImage = document.documentElement.classList.contains('webp')
+  let randomImage = webp
     ? heroImages.mod[MathUtils.getRandomNum(0, 2)]
     : heroImages.old[MathUtils.getRandomNum(0, 2)];
 
   heroEl.style.backgroundImage = `var(--image-overlay), url(${randomImage})`;
 };
 
-window.addEventListener('load', () => setRandomImage(), false);
+setTimeout(() => setRandomImage(), 200);
