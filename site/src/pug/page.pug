@@ -1,5 +1,6 @@
 include ./mixins
 
+- const message = 'В вашем браузере необходимо включить JavaScript.'
 block vars
 
 doctype html
@@ -31,7 +32,7 @@ html(class="no-js" dir="ltr" lang="ru")
     block head
 
   body.page.page--loading(itemscope itemtype="https://schema.org/WebPage")
-    noscript: h2 В вашем браузере необходимо включить JavaScript.
+    noscript: h2= message
     include ./_header
 
     //- https://schema.org/docs/datamodel.html#mainEntityBackground
@@ -42,12 +43,13 @@ html(class="no-js" dir="ltr" lang="ru")
       itemid= data.meta.domain
     )
       include ./_microdata
-      .a2hs.hidden
-        +cta({
-          base: 'a2hs',
-          type: 'button',
-          text: 'Установить'
-        })
+      if page.id === 'index'
+        .a2hs.hidden
+          +cta({
+            base: 'a2hs',
+            type: 'button',
+            text: 'Установить'
+          })
       block content
 
     include ./_cursor
