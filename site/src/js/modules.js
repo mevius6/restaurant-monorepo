@@ -53,6 +53,7 @@ const doc = document,
     parsedUrl.pathname === '/gallery' ||
     parsedUrl.pathname === '/gallery.html'
   ) {
+    const slideshow = await import('./slideshow.js');
     // const masonry = await import('./masonry-fallback.js');
   }
 

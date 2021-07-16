@@ -2,11 +2,29 @@ extends ./pug/page
 
 block vars
   - let page = data.pages.gallery
+  -
+    const offers2 = [
+      {
+        'title': 'Выпекаем торты с душой на все случаи жизни',
+        'field': 'У нас можно подобрать тортик на любое торжество, а именно на свадьбу, корпоративные мероприятия, детские дни рождения… Торты изготавливаем только из натуральных ингредиентов!'
+      }, {
+        'title': 'В нашей кондитерской вы найдете более 30 начинок',
+        'field': 'Менеджеры помогут определиться с выбором и с индивидуальным оформлением. Минимальный вес торта от 1,5 кг. Стоимость от 1400 ₽ Мы изготавливаем не только бисквитные торты, но и чизкейки, муссовые торты. А также в нашей кондитерской можно заказать порционные десерты, капкейки, эклеры, муссовые пирожные и много другое. Наш телефон: +7 (8162) 99-88-11. Мы работаем 10:00-20:00, без выходных!'
+      }
+    ]
   - const generateNumSeq = num => Array.from({length: num}, (v, i) => i)
   - const imageCount = generateNumSeq(57)
   - const imagePath = 'images/grid'
 
 block content
+  section(data-id="slideshow")
+    +slides({
+      name: 'slides--3',
+      data: offers2,
+      imagePath: 'slides3',
+      slideCols: 1,
+      count: true
+    })
   .grid.grid--masonry
     each num in imageCount
       - let src = `${imagePath}/${num + 1}`

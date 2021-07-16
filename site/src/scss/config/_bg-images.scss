@@ -7,11 +7,17 @@
       1: '1',
       2: '2',
       3: '3',
+      4: '4',
+      5: '5',
     ),
     'slides2': (
       1: '1',
       2: '2',
       3: '3',
+    ),
+    'slides3': (
+      1: '1',
+      2: '2',
     ),
     'vertical': (
       1: '1',
@@ -26,7 +32,8 @@
     $opted-subdir: map.get($subdir-list, $subdir);
 
     @each $index, $value in $opted-subdir {
-      &:nth-of-type(#{$index}) [class$='#{$selector}'] {
+      // &:nth-of-type(#{$index}) [class$='#{$selector}'] {
+      &:nth-of-type(#{$index}) {
         .webp & {
           background-image: url('#{$subdir-prefix}/#{$subdir}/#{$value}.webp');
         }
