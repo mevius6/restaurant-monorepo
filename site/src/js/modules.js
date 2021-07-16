@@ -22,12 +22,13 @@ const doc = document,
     parsedUrl.pathname === '/' ||
     parsedUrl.pathname === '/index.html'
   ) {
-    const feed = await import('./card-feed.js');
+    const hero = await import('./hero.js');
     const reveal = await import('./reveal-effect.js');
     const parallax = await import('./parallax.js');
     const map = await import('./map.js');
 
     loadReviews().then(() => loadCarousel());
+    loadCardFeed();
   }
   if (
     parsedUrl.pathname === '/about' ||
@@ -54,7 +55,6 @@ const doc = document,
     parsedUrl.pathname === '/gallery.html'
   ) {
     const slideshow = await import('./slideshow.js');
-    // const masonry = await import('./masonry-fallback.js');
   }
 
   loadNav();
@@ -70,9 +70,16 @@ async function loadNav() {
 async function loadReviews() {
   const { default: Reviews } = await import('./reviews.js');
   // eslint-disable-next-line no-undef
-  const firstEl = review1; // doc.getElementById('review1');
+  const firstReview = review1;
   // eslint-disable-next-line no-unused-vars
-  const reviews = new Reviews(firstEl.parentNode);
+  const reviews = new Reviews(firstReview.parentNode);
+}
+async function loadCardFeed() {
+  const { default: CardFeed } = await import('./card-feed.js');
+  // eslint-disable-next-line no-undef
+  const firstPost = post1;
+  // eslint-disable-next-line no-unused-vars
+  const feed = new CardFeed(firstPost.parentNode);
 }
 
 async function loadCarousel() {

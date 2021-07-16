@@ -259,6 +259,3 @@ export default class CardFeed {
     return allPosts;
   }
 }
-
-// eslint-disable-next-line no-unused-vars
-const feed = new CardFeed(document.getElementById('post1').parentNode);

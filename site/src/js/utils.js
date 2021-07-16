@@ -120,7 +120,7 @@ const createNode = (expr) => document.createElement(expr);
 const appendNode = (expr, con) => expr.appendChild(con);
 
 const createNodeWithClass = (expr, con) => {
-  const elem = document.createElement(expr);
+  const elem = createNode(expr);
   // elem.classList.add(con);
   elem.className += con;
   return elem;
