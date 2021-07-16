@@ -17,10 +17,6 @@
     block-size: 100vh; // override mixin from 100%
     transform: translateY(-50%);
     will-change: transform;
-
-    [data-browser='Firefox'] & {
-      --offset: -20vh;
-    }
   }
 
   &-image {
