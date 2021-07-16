@@ -4,11 +4,11 @@
   to { stroke-width: 0; }
 }
 
-// @keyframes slideIn {
-//   0% { transform: translateX(0); }
-//   25% { transform: translateX(-25%) skewX(-15deg); }
-//   100% { transform: translateX(-100%) skewX(0); }
-// }
+@keyframes slideOutLeft {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(-100%) skewX(0); }
+}
 
 [data-id='hero'] {
   --image-overlay:
@@ -22,14 +22,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  .webp & {
-    background-image: var(--image-overlay), url('../images/hero/1.webp');
-  }
-
-  .no-webp & {
-    background-image: var(--image-overlay), url('../images/hero/1.jpg');
-  }
 
   [data-theme-style='dark'] & {
     --image-overlay:
@@ -56,9 +48,9 @@
       --char-total: 8;
       --seq1-duration: 2500ms;
       --seq2-duration: calc(var(--duration) * var(--char-total));
+      --interval: calc(var(--seq1-duration) - var(--seq2-duration));
       --duration: 100ms;
       --delay: calc(var(--i, 1) * var(--duration) + var(--interval));
-      --interval: calc(var(--seq1-duration) - var(--seq2-duration));
 
       color: var(--background);
       stroke: var(--accent);
@@ -87,20 +79,21 @@
   .overlay {
     overflow: hidden;
     background-color: var(--background);
-    opacity: var(--a);
-    transition: opacity 800ms 2500ms ease-in-out;
-
-    .page--loaded & {
-      --a: 0;
-      overflow: auto;
-    }
+    opacity: var(--a, 1);
+    // transition: opacity 800ms 2500ms ease-in-out;
 
     // .page--loaded & {
-    //   transform-origin: 0 50%;
-    //   animation-name: slideIn;
-    //   animation-duration: 300ms;
-    //   animation-fill-mode: both;
-    //   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    //   --a: 0;
+    //   overflow: auto;
     // }
+
+    .page--loaded & {
+      transform-origin: 0 50%;
+      animation-name: slideOutLeft;
+      animation-duration: 300ms;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-delay: 2500ms;
+    }
   }
 }
