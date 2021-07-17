@@ -76,9 +76,15 @@ section {
 }
 
 h1 {
-  font-size: 4.5rem;
+  // font-size: 4.5rem;
   font-weight: 700;
   letter-spacing: -.04em;
+
+  font-size: clamp(
+    2.5rem,
+    5vw + 1rem,
+    4.5rem
+  );
 
   @include config.respond('tablet') {
     font-size: 6.25rem;
