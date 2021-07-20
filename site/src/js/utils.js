@@ -228,6 +228,36 @@ function trapFocus(element) {
   });
 }
 
+/**
+ * https://w3c.github.io/IntersectionObserver/ — spec
+ *
+ * https://github.blog/2021-01-29-making-githubs-new-homepage-fast-and-performant/
+ *
+ * @param {*} entries target
+ * @param {*} observer use io w/ default options or set options via obj
+ * @example
+ * let options = {
+ *  root: document.querySelector('#scrollArea'),
+ *  rootMargin: '0px',
+ *  threshold: [1.0],
+ *  // V2: Track the actual visibility of the element
+ *  trackVisibility: true,
+ *  // V2: Set a minimum delay between notifications
+ *  delay: 100
+ * }
+ *
+ * for (const element of querySelectorAll('.js-anim')) {
+ *  animationObserver.observe(element, options);
+ * }
+ */
+const animationObserver = new IntersectionObserver((entries, observer) => {
+  for (const entry of entries) {
+    entry.target.classList.toggle('.js-anim--running', entry.isIntersecting)
+  }
+});
+
+const randomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 export {
   MathUtils,
   calcWinsize,
@@ -248,4 +278,5 @@ export {
   delay,
   asyncFetchJSON,
   trapFocus,
+  randomValue,
 };

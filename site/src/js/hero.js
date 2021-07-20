@@ -1,4 +1,4 @@
-import { MathUtils } from './utils';
+import { randomValue } from './utils';
 import heroImage1 from 'url:../images/hero/1.jpg';
 import heroImage2 from 'url:../images/hero/2.jpg';
 import heroImage3 from 'url:../images/hero/3.jpg';
@@ -15,8 +15,8 @@ const heroImages = {
 
 const setRandomImage = () => {
   let randomImage = webp
-    ? heroImages.mod[MathUtils.getRandomNum(0, 2)]
-    : heroImages.old[MathUtils.getRandomNum(0, 2)];
+    ? randomValue(heroImages.mod)
+    : randomValue(heroImages.old);
 
   heroEl.style.backgroundImage = `var(--image-overlay), url(${randomImage})`;
 };

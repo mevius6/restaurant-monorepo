@@ -1,10 +1,10 @@
 import { gsap } from 'gsap';
 import {
-  MathUtils,
   findByData,
   createNodeWithClass,
   appendNode,
   selectAll,
+  randomValue,
 } from './utils';
 import panoImage1 from 'url:../images/pano/1.jpg';
 import panoImage2 from 'url:../images/pano/2.jpg';
@@ -21,8 +21,8 @@ const panoImages = {
 let webp = document.documentElement.classList.contains('webp');
 
 let randomImage = webp
-  ? panoImages.mod[MathUtils.getRandomNum(0, 2)]
-  : panoImages.old[MathUtils.getRandomNum(0, 2)];
+  ? randomValue(panoImages.mod)
+  : randomValue(panoImages.old);
 
 const pano = findByData('panorama', 'id');
 const centered = {
