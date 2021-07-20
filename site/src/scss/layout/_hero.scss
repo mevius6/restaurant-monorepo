@@ -62,8 +62,8 @@
       stroke-dasharray: var(--pattern, 1500);
       stroke-dashoffset: var(--distance, 1500);
 
-      @for $i from 2 through 8 {
-        &:nth-of-type(#{$i}) { --i: #{$i}; }
+      @for $i from 1 through 8 {
+        &:nth-of-type(#{$i}) { --i: calc(var(--char-total) - #{$i}); }
       }
 
       .page--loaded & {
