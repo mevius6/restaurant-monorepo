@@ -36,6 +36,7 @@ isMobileDevice()
   });
 
 window.addEventListener('load', () => {
+  root.classList.replace('no-js', 'js');
   body.classList.replace('page--loading', 'page--loaded');
   root.dataset.browser = browser;
   // root.dataset.os = os;
