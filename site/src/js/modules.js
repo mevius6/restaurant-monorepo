@@ -82,7 +82,7 @@ async function loadReviews() {
 
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
-      console.log(entries);
+      // console.log(entries);
       if (entry.isIntersecting) {
         // eslint-disable-next-line no-unused-vars
         const reviews = new Reviews(firstReview.parentNode);
@@ -109,7 +109,7 @@ async function loadCardFeed() {
 
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
-      console.log(entries);
+      // console.log(entries);
       if (entry.isIntersecting) {
         // eslint-disable-next-line no-unused-vars
         const feed = new CardFeed(firstPost.parentNode);
