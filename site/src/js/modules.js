@@ -69,17 +69,56 @@ async function loadNav() {
 
 async function loadReviews() {
   const { default: Reviews } = await import('./reviews.js');
+
+  const scrollRoot = document.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
   const firstReview = review1;
-  // eslint-disable-next-line no-unused-vars
-  const reviews = new Reviews(firstReview.parentNode);
+
+  const options = {
+    root: scrollRoot,
+    rootMargin: '0px',
+    threshold: 0
+  }
+
+  const loadObserver = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      console.log(entries);
+      if (entry.isIntersecting) {
+        // eslint-disable-next-line no-unused-vars
+        const reviews = new Reviews(firstReview.parentNode);
+        observer.unobserve(entry.target);
+      }
+    }
+  });
+
+  loadObserver.observe(firstReview, options);
 }
+
 async function loadCardFeed() {
   const { default: CardFeed } = await import('./card-feed.js');
+
+  const scrollRoot = document.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
   const firstPost = post1;
-  // eslint-disable-next-line no-unused-vars
-  const feed = new CardFeed(firstPost.parentNode);
+
+  const options = {
+    root: scrollRoot,
+    rootMargin: '0px',
+    threshold: 0
+  }
+
+  const loadObserver = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      console.log(entries);
+      if (entry.isIntersecting) {
+        // eslint-disable-next-line no-unused-vars
+        const feed = new CardFeed(firstPost.parentNode);
+        observer.unobserve(entry.target);
+      }
+    }
+  });
+
+  loadObserver.observe(firstPost, options);
 }
 
 async function loadCarousel() {

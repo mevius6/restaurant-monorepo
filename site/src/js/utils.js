@@ -234,15 +234,15 @@ function trapFocus(element) {
  * https://github.blog/2021-01-29-making-githubs-new-homepage-fast-and-performant/
  *
  * @param {*} entries target
- * @param {*} observer use io w/ default options or set options via obj
+ * @param {*} observer io w/ default options
  * @example
  * let options = {
- *  root: document.querySelector('#scrollArea'),
+ *  root: document.querySelector('[data-scroll-root]'),
  *  rootMargin: '0px',
  *  threshold: [1.0],
  *  // V2: Track the actual visibility of the element
  *  trackVisibility: true,
- *  // V2: Set a minimum delay between notifications
+ *  // V2: Set a minimum delay b/t notifications
  *  delay: 100
  * }
  *
