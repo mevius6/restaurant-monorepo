@@ -233,26 +233,26 @@ function trapFocus(element) {
  *
  * https://github.blog/2021-01-29-making-githubs-new-homepage-fast-and-performant/
  *
- * @param {*} entries target
- * @param {*} observer io w/ default options
+ * @param {*} entries target Element
+ * @param {*} observer IO w/ default options
  * @example
- * let options = {
- *  root: document.querySelector('[data-scroll-root]'),
- *  rootMargin: '0px',
- *  threshold: [1.0],
- *  // V2: Track the actual visibility of the element
- *  trackVisibility: true,
- *  // V2: Set a minimum delay b/t notifications
- *  delay: 100
+ * const options = {
+ *   root: document.querySelector('[data-io-root]'),
+ *   rootMargin: '0px',
+ *   threshold: [1.0],
+ *   // V2: Track the actual visibility of the element
+ *   trackVisibility: true,
+ *   // V2: Set a minimum delay b/t notifications
+ *   delay: 100
  * }
  *
  * for (const element of querySelectorAll('.js-anim')) {
- *  animationObserver.observe(element, options);
+ *   animationObserver.observe(element, options);
  * }
  */
 const animationObserver = new IntersectionObserver((entries, observer) => {
   for (const entry of entries) {
-    entry.target.classList.toggle('.js-anim--running', entry.isIntersecting)
+    entry.target.classList.toggle('js-anim--running', entry.isIntersecting)
   }
 });
 

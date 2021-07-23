@@ -5,9 +5,21 @@ const doc = document,
 // https://github.com/tc39/proposal-dynamic-import
 // https://github.com/parcel-bundler/parcel/issues/1401
 
+const modules = {
+  toggle: import('./theme-switcher.js'),
+  map: import('./map.js'),
+};
+
+async function loadModule(name) {
+  const module = await modules[name];
+
+  return module;
+}
+
 /* eslint-disable no-unused-vars */
 (async () => {
-  const toggle = await import('./theme-switcher.js').then(() => {
+  // const toggle = await import('./theme-switcher.js').then(() => {
+  loadModule('toggle').then(() => {
     const themeSwitch = doc.querySelector('theme-switch');
     root.setAttribute('data-theme-style', themeSwitch.mode === 'dark'
       ? 'dark'
@@ -77,7 +89,7 @@ async function loadReviews() {
   const options = {
     root: scrollRoot,
     rootMargin: '0px',
-    threshold: 0
+    threshold: 0,
   }
 
   const loadObserver = new IntersectionObserver((entries, observer) => {
@@ -90,7 +102,6 @@ async function loadReviews() {
       }
     }
   });
-
   loadObserver.observe(firstReview, options);
 }
 
@@ -104,7 +115,7 @@ async function loadCardFeed() {
   const options = {
     root: scrollRoot,
     rootMargin: '0px',
-    threshold: 0
+    threshold: 0,
   }
 
   const loadObserver = new IntersectionObserver((entries, observer) => {
@@ -117,7 +128,6 @@ async function loadCardFeed() {
       }
     }
   });
-
   loadObserver.observe(firstPost, options);
 }
 
