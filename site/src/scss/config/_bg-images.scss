@@ -32,8 +32,7 @@
     $opted-subdir: map.get($subdir-list, $subdir);
 
     @each $index, $value in $opted-subdir {
-      // &:nth-of-type(#{$index}) [class$='#{$selector}'] {
-      &:nth-of-type(#{$index}) {
+      &:nth-of-type(#{$index}) { // [class$='#{$selector}']
         .webp & {
           background-image: url('#{$subdir-prefix}/#{$subdir}/#{$value}.webp');
         }
