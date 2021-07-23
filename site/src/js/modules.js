@@ -8,11 +8,13 @@ const doc = document,
 const modules = {
   toggle: import('./theme-switcher.js'),
   map: import('./map.js'),
+  hero: import('./hero.js'),
+  reveal: import('./reveal-effect.js'),
+  parallax: import('./parallax.js'),
 };
 
 async function loadModule(name) {
   const module = await modules[name];
-
   return module;
 }
 
@@ -34,10 +36,10 @@ async function loadModule(name) {
     parsedUrl.pathname === '/' ||
     parsedUrl.pathname === '/index.html'
   ) {
-    const hero = await import('./hero.js');
-    const reveal = await import('./reveal-effect.js');
-    const parallax = await import('./parallax.js');
-    const map = await import('./map.js');
+    loadModule('hero')
+      .then (() => loadModule('reveal'))
+      .then (() => loadModule('parallax'))
+      .then (() => loadModule('map'));
 
     loadReviews().then(() => loadCarousel());
     loadCardFeed();
