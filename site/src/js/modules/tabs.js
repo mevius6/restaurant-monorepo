@@ -1,5 +1,5 @@
 import { revealList } from './reveal-list';
-import { selectAll } from './utils';
+import { selectAll } from '../utils';
 
 // https://github.com/github/tab-container-element
 

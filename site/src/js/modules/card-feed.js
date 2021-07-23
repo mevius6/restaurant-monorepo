@@ -6,7 +6,7 @@ import {
   appendNode,
   selectAll,
   delay,
-} from './utils';
+} from '../utils';
 import { getAllPostsForHome } from './fetch-posts';
 
 // eslint-disable-next-line no-unused-vars

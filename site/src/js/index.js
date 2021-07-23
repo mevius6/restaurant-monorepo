@@ -1,4 +1,4 @@
-import Cursor from './cursor';
+import Cursor from './modules/cursor';
 import {
   checkBrowser,
   checkWebpFeature,

@@ -1,4 +1,4 @@
-import { selectAll } from './utils';
+import { selectAll } from '../utils';
 
 const parsedUrl = new URL(window.location.href);
 

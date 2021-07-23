@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { selectAll } from './utils';
+import { selectAll } from '../utils';
 
 gsap.registerPlugin(ScrollTrigger);
 

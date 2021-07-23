@@ -5,7 +5,7 @@ import {
   appendNode,
   selectAll,
   randomValue,
-} from './utils';
+} from '../utils';
 import panoImage1 from 'url:../images/pano/1.jpg';
 import panoImage2 from 'url:../images/pano/2.jpg';
 import panoImage3 from 'url:../images/pano/3.jpg';

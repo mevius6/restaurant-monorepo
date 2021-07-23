@@ -231,8 +231,6 @@ function trapFocus(element) {
 /**
  * https://w3c.github.io/IntersectionObserver/ — spec
  *
- * https://github.blog/2021-01-29-making-githubs-new-homepage-fast-and-performant/
- *
  * @param {*} entries target Element
  * @param {*} observer IO w/ default options
  * @example

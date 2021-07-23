@@ -1,27 +1,29 @@
 const parsedUrl = new URL(window.location.href);
 const doc = document,
       root = doc.documentElement;
-
-// https://github.com/tc39/proposal-dynamic-import
-// https://github.com/parcel-bundler/parcel/issues/1401
+const path = './modules';
 
 const modules = {
-  toggle: import('./theme-switcher.js'),
-  map: import('./map.js'),
-  hero: import('./hero.js'),
-  reveal: import('./reveal-effect.js'),
-  parallax: import('./parallax.js'),
+  carousel: import(`${path}/carousel.js`),
+  hero: import(`${path}/hero.js`),
+  map: import(`${path}/map.js`),
+  mode: import(`${path}/theme-switcher.js`),
+  pano: import(`${path}/panorama.js`),
+  parallax: import(`${path}/parallax.js`),
+  pdf: import(`${path}/pdf-viewer.js`),
+  reveal: import(`${path}/reveal-effect.js`),
+  slides: import(`${path}/slideshow.js`),
+  tabs: import(`${path}/tabs.js`),
 };
 
 async function loadModule(name) {
-  const module = await modules[name];
+  const module = await modules[name]
+    .then(() => console.log(`модуль ${name} импортирован 💫`));
   return module;
 }
 
-/* eslint-disable no-unused-vars */
 (async () => {
-  // const toggle = await import('./theme-switcher.js').then(() => {
-  loadModule('toggle').then(() => {
+  loadModule('mode').then(() => {
     const themeSwitch = doc.querySelector('theme-switch');
     root.setAttribute('data-theme-style', themeSwitch.mode === 'dark'
       ? 'dark'
@@ -41,39 +43,38 @@ async function loadModule(name) {
       .then (() => loadModule('parallax'))
       .then (() => loadModule('map'));
 
-    loadReviews().then(() => loadCarousel());
+    loadReviews().then(() => loadModule('carousel'));
     loadCardFeed();
   }
   if (
     parsedUrl.pathname === '/about' ||
     parsedUrl.pathname === '/about.html'
   ) {
-    const slideshow = await import('./slideshow.js');
+    loadModule('slides');
   }
   if (
     parsedUrl.pathname === '/menu' ||
     parsedUrl.pathname === '/menu.html'
   ) {
-    const slideshow = await import('./slideshow.js');
-    const tabs = await import('./tabs.js');
-    const pdf = await import('./pdf-viewer');
+    loadModule('slides')
+      .then (() => loadModule('tabs'))
+      .then (() => loadModule('pdf'));
   }
   if (
     parsedUrl.pathname === '/atm' ||
     parsedUrl.pathname === '/atm.html'
   ) {
-    const panorama = await import('./panorama.js');
+    loadModule('pano');
   }
   if (
     parsedUrl.pathname === '/gallery' ||
     parsedUrl.pathname === '/gallery.html'
   ) {
-    const slideshow = await import('./slideshow.js');
+    loadModule('slides');
   }
 
   loadNav();
 })();
-/* eslint-enable no-unused-vars */
 
 async function loadNav() {
   const { default: DisclosureForNav } = await import('./nav.js');
@@ -82,7 +83,7 @@ async function loadNav() {
 }
 
 async function loadReviews() {
-  const { default: Reviews } = await import('./reviews.js');
+  const { default: Reviews } = await import('./modules/reviews.js');
 
   const scrollRoot = document.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
@@ -131,9 +132,4 @@ async function loadCardFeed() {
     }
   });
   loadObserver.observe(firstPost, options);
-}
-
-async function loadCarousel() {
-  // eslint-disable-next-line no-unused-vars
-  const carousel = await import('./carousel');
 }

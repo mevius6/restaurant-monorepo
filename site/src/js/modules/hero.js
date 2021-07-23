@@ -1,4 +1,4 @@
-import { randomValue } from './utils';
+import { randomValue } from '../utils';
 import heroImage1 from 'url:../images/hero/1.jpg';
 import heroImage2 from 'url:../images/hero/2.jpg';
 import heroImage3 from 'url:../images/hero/3.jpg';

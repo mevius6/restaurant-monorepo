@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { selectAll, getWidth, findByData } from './utils';
+import { selectAll, getWidth, findByData } from '../utils';
 
 gsap.registerPlugin(ScrollTrigger);
 

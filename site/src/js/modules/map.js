@@ -1,6 +1,6 @@
 // import '../scss/map.scss';
-import L from './vendor/leaflet';
-import { selectAll } from './utils';
+import L from '../vendor/leaflet';
+import { selectAll } from '../utils';
 
 // TODO: Использовать Mapbox Directions API и Geolocation API,
 // для построения маршрута (альтернатива Google Maps).

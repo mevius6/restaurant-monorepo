@@ -1,4 +1,4 @@
-import { asyncFetchJSON } from './utils';
+import { asyncFetchJSON } from '../utils';
 
 // https://rapidapi.com/apidojo/api/travel-advisor/specs
 

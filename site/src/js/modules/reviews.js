@@ -4,7 +4,7 @@ import {
   asyncFetchJSON,
   select,
   selectAll
-} from './utils';
+} from '../utils';
 
 const regex = /\s+(\.|,|!|\?)/g;
 const subst = `$1`;

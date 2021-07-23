@@ -1,7 +1,7 @@
 import { revealText } from './reveal-text';
 // import { revealList } from './reveal-list';
 import { revealCard } from './reveal-card';
-import { selectAll } from './utils';
+import { selectAll } from '../utils';
 
 /* eslint-disable no-unused-vars */
 const revealHeadlines = revealText(selectAll('.reveal'));
