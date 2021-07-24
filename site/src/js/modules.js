@@ -61,12 +61,14 @@ const doc = document,
 
 async function loadNav() {
   const { default: DisclosureForNav } = await import('./modules/nav');
+
   // eslint-disable-next-line no-unused-vars
-  const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
+  const disclosure = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
 async function loadCarousel() {
   const { default: Carousel } = await import('./modules/carousel');
+
   const el = doc.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-unused-vars
   const carousel = new Carousel(el, {
@@ -78,46 +80,47 @@ async function loadCarousel() {
 
 async function loadReviews() {
   const { default: Reviews } = await import('./modules/reviews');
-  const scrollRoot = doc.querySelector('[data-id="reviews"]');
+
   // eslint-disable-next-line no-undef
   const firstReview = review1;
-  const options = {
-    root: scrollRoot,
-    rootMargin: '0px',
-    threshold: 0,
-  }
-  const loadObserver = new IntersectionObserver((entries, observer) => {
-    for (const entry of entries) {
-      // console.log(entries);
-      if (entry.isIntersecting) {
-        // eslint-disable-next-line no-unused-vars
-        const reviews = new Reviews(firstReview.parentNode);
-        observer.unobserve(entry.target);
-      }
-    }
+  const loadTrigger = createObserver(firstReview);
+
+  loadTrigger.then(() => {
+    // eslint-disable-next-line no-unused-vars
+    const reviews = new Reviews(firstReview.parentNode);
   });
-  loadObserver.observe(firstReview, options);
 }
 
 async function loadCardFeed() {
   const { default: CardFeed } = await import('./modules/card-feed');
-  const scrollRoot = doc.querySelector('[data-id="posts"]');
+
   // eslint-disable-next-line no-undef
   const firstPost = post1;
-  const options = {
-    root: scrollRoot,
-    rootMargin: '0px',
-    threshold: 0,
+  const loadTrigger = createObserver(firstPost);
+
+  loadTrigger.then(() => {
+    // eslint-disable-next-line no-unused-vars
+    const feed = new CardFeed(firstPost.parentNode);
+  });
+}
+
+async function createObserver(el, ops={}) {
+  let isIntersecting;
+
+  if (Object.entries(ops).length === 0) {
+    ops.root = el.parentNode;
+    ops.rootMargin = '0px';
+    ops.threshold = 0;
   }
-  const loadObserver = new IntersectionObserver((entries, observer) => {
+
+  const observer = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);
-      if (entry.isIntersecting) {
-        // eslint-disable-next-line no-unused-vars
-        const feed = new CardFeed(firstPost.parentNode);
-        observer.unobserve(entry.target);
-      }
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting) observer.unobserve(entry.target);
     }
   });
-  loadObserver.observe(firstPost, options);
+  observer.observe(el, ops);
+
+  return isIntersecting;
 }

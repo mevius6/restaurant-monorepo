@@ -277,4 +277,5 @@ export {
   asyncFetchJSON,
   trapFocus,
   randomValue,
+  animationObserver
 };
