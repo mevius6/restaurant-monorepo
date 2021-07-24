@@ -1,18 +1,17 @@
 const parsedUrl = new URL(window.location.href);
 const doc = document,
       root = doc.documentElement;
-const PATH = './modules';
 const modules = {
-  carousel: import(`${PATH}/carousel.js`),
-  hero: import(`${PATH}/hero.js`),
-  map: import(`${PATH}/map.js`),
-  mode: import(`${PATH}/theme-switcher.js`),
-  pano: import(`${PATH}/panorama.js`),
-  parallax: import(`${PATH}/parallax.js`),
-  pdf: import(`${PATH}/pdf-viewer.js`),
-  reveal: import(`${PATH}/reveal-effect.js`),
-  slides: import(`${PATH}/slideshow.js`),
-  tabs: import(`${PATH}/tabs.js`),
+  carousel: import('./modules/carousel.js'),
+  hero: import('./modules/hero.js'),
+  map: import('./modules/map.js'),
+  mode: import('./modules/theme-switcher.js'),
+  pano: import('./modules/panorama.js'),
+  parallax: import('./modules/parallax.js'),
+  pdf: import('./modules/pdf-viewer.js'),
+  reveal: import('./modules/reveal-effect.js'),
+  slides: import('./modules/slideshow.js'),
+  tabs: import('./modules/tabs.js'),
 };
 
 async function loadModule(name) {
@@ -76,14 +75,14 @@ async function loadModule(name) {
 })();
 
 async function loadNav() {
-  const { default: DisclosureForNav } = await import(`${PATH}/nav.js`);
+  const { default: DisclosureForNav } = await import('./modules/nav.js');
   // eslint-disable-next-line no-unused-vars
   const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
 async function loadReviews() {
-  const { default: Reviews } = await import(`${PATH}/reviews.js`);
-  const scrollRoot = document.querySelector('[data-id="reviews"]');
+  const { default: Reviews } = await import('./modules/reviews.js');
+  const scrollRoot = doc.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
   const firstReview = review1;
   const options = {
@@ -105,8 +104,8 @@ async function loadReviews() {
 }
 
 async function loadCardFeed() {
-  const { default: CardFeed } = await import(`${PATH}/card-feed.js`);
-  const scrollRoot = document.querySelector('[data-id="posts"]');
+  const { default: CardFeed } = await import('./modules/card-feed.js');
+  const scrollRoot = doc.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
   const firstPost = post1;
   const options = {

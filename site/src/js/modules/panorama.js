@@ -6,12 +6,12 @@ import {
   selectAll,
   randomValue,
 } from '../utils';
-import panoImage1 from 'url:../images/pano/1.jpg';
-import panoImage2 from 'url:../images/pano/2.jpg';
-import panoImage3 from 'url:../images/pano/3.jpg';
-import panoImage1_mod from 'url:../images/pano/1.webp';
-import panoImage2_mod from 'url:../images/pano/2.webp';
-import panoImage3_mod from 'url:../images/pano/3.webp';
+import panoImage1 from 'url:../../images/pano/1.jpg';
+import panoImage2 from 'url:../../images/pano/2.jpg';
+import panoImage3 from 'url:../../images/pano/3.jpg';
+import panoImage1_mod from 'url:../../images/pano/1.webp';
+import panoImage2_mod from 'url:../../images/pano/2.webp';
+import panoImage3_mod from 'url:../../images/pano/3.webp';
 
 const panoImages = {
   old: [panoImage1, panoImage2, panoImage3],
