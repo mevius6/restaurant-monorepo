@@ -65,9 +65,19 @@ async function loadNav() {
   const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
+async function loadCarousel() {
+  const { default: Carousel } = await import('./modules/carousel');
+  const el = doc.querySelector('[data-id="reviews"]');
+  // eslint-disable-next-line no-unused-vars
+  const carousel = new Carousel(el, {
+    control: 'dots',
+    offset: 'half',
+    reveal: 'true',
+  });
+}
+
 async function loadReviews() {
   const { default: Reviews } = await import('./modules/reviews');
-
   const scrollRoot = doc.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
   const firstReview = review1;
@@ -85,13 +95,12 @@ async function loadReviews() {
         observer.unobserve(entry.target);
       }
     }
-  })
+  });
   loadObserver.observe(firstReview, options);
 }
 
 async function loadCardFeed() {
   const { default: CardFeed } = await import('./modules/card-feed');
-
   const scrollRoot = doc.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
   const firstPost = post1;
@@ -100,7 +109,6 @@ async function loadCardFeed() {
     rootMargin: '0px',
     threshold: 0,
   }
-
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);
@@ -112,9 +120,4 @@ async function loadCardFeed() {
     }
   });
   loadObserver.observe(firstPost, options);
-}
-
-async function loadCarousel() {
-  // eslint-disable-next-line no-unused-vars
-  const carousel = await import('./modules/carousel');
 }

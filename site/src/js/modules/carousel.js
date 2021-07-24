@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { selectAll, getWidth, findByData } from '../utils';
+import { selectAll, getWidth } from '../utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -159,10 +159,3 @@ export default class Carousel {
     this.anim.pause(0).invalidate();
   }
 }
-
-// eslint-disable-next-line no-unused-vars
-const carousel = new Carousel(findByData('reviews', 'id'), {
-  control: 'dots',
-  offset: 'half',
-  reveal: 'true',
-});
