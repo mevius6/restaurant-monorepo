@@ -1,19 +1,18 @@
 const parsedUrl = new URL(window.location.href);
 const doc = document,
       root = doc.documentElement;
-const path = './modules';
-
+const PATH = './modules';
 const modules = {
-  carousel: import(`${path}/carousel.js`),
-  hero: import(`${path}/hero.js`),
-  map: import(`${path}/map.js`),
-  mode: import(`${path}/theme-switcher.js`),
-  pano: import(`${path}/panorama.js`),
-  parallax: import(`${path}/parallax.js`),
-  pdf: import(`${path}/pdf-viewer.js`),
-  reveal: import(`${path}/reveal-effect.js`),
-  slides: import(`${path}/slideshow.js`),
-  tabs: import(`${path}/tabs.js`),
+  carousel: import(`${PATH}/carousel.js`),
+  hero: import(`${PATH}/hero.js`),
+  map: import(`${PATH}/map.js`),
+  mode: import(`${PATH}/theme-switcher.js`),
+  pano: import(`${PATH}/panorama.js`),
+  parallax: import(`${PATH}/parallax.js`),
+  pdf: import(`${PATH}/pdf-viewer.js`),
+  reveal: import(`${PATH}/reveal-effect.js`),
+  slides: import(`${PATH}/slideshow.js`),
+  tabs: import(`${PATH}/tabs.js`),
 };
 
 async function loadModule(name) {
@@ -77,24 +76,21 @@ async function loadModule(name) {
 })();
 
 async function loadNav() {
-  const { default: DisclosureForNav } = await import('./nav.js');
+  const { default: DisclosureForNav } = await import(`${PATH}/nav.js`);
   // eslint-disable-next-line no-unused-vars
   const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
 async function loadReviews() {
-  const { default: Reviews } = await import('./modules/reviews.js');
-
+  const { default: Reviews } = await import(`${PATH}/reviews.js`);
   const scrollRoot = document.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
   const firstReview = review1;
-
   const options = {
     root: scrollRoot,
     rootMargin: '0px',
     threshold: 0,
   }
-
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);
@@ -109,18 +105,15 @@ async function loadReviews() {
 }
 
 async function loadCardFeed() {
-  const { default: CardFeed } = await import('./card-feed.js');
-
+  const { default: CardFeed } = await import(`${PATH}/card-feed.js`);
   const scrollRoot = document.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
   const firstPost = post1;
-
   const options = {
     root: scrollRoot,
     rootMargin: '0px',
     threshold: 0,
   }
-
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);

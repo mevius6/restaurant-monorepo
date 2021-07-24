@@ -1,6 +1,6 @@
-import {gsap} from 'gsap';
-import {MathUtils, select} from '../utils';
-import {EventEmitter} from 'events';
+import { gsap } from 'gsap';
+import { MathUtils, select } from '../utils';
+import { EventEmitter } from 'events';
 
 // ? https://medium.com/14islands/developing-a-performant-custom-cursor-89f1688a02eb
 export default class Cursor extends EventEmitter {
