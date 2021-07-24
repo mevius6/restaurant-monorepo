@@ -2,7 +2,7 @@ const UA = navigator.userAgent;
 const root = document.documentElement;
 const body = document.body;
 
-const MathUtils = {
+const math = {
   map: (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c,
   // линейная интерполяция
   lerp: (min, max, val) => min * (1 - val) + max * val,
@@ -257,7 +257,7 @@ const animationObserver = new IntersectionObserver((entries, observer) => {
 const randomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 export {
-  MathUtils,
+  math,
   calcWinsize,
   getMousePos,
   isMobileDevice,

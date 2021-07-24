@@ -1,27 +1,13 @@
 const parsedUrl = new URL(window.location.href);
 const doc = document,
       root = doc.documentElement;
-const modules = {
-  carousel: import('./modules/carousel.js'),
-  hero: import('./modules/hero.js'),
-  map: import('./modules/map.js'),
-  mode: import('./modules/theme-switcher.js'),
-  pano: import('./modules/panorama.js'),
-  parallax: import('./modules/parallax.js'),
-  pdf: import('./modules/pdf-viewer.js'),
-  reveal: import('./modules/reveal-effect.js'),
-  slides: import('./modules/slideshow.js'),
-  tabs: import('./modules/tabs.js'),
-};
 
-async function loadModule(name) {
-  const module = await modules[name]
-    .then(() => console.log(`модуль ${name} импортирован 💫`));
-  return module;
-}
+// https://github.com/tc39/proposal-dynamic-import
+// https://github.com/parcel-bundler/parcel/issues/1401
 
+/* eslint-disable no-unused-vars */
 (async () => {
-  loadModule('mode').then(() => {
+  const toggle = await import('./modules/theme-switcher').then(() => {
     const themeSwitch = doc.querySelector('theme-switch');
     root.setAttribute('data-theme-style', themeSwitch.mode === 'dark'
       ? 'dark'
@@ -36,52 +22,54 @@ async function loadModule(name) {
     parsedUrl.pathname === '/' ||
     parsedUrl.pathname === '/index.html'
   ) {
-    loadModule('hero')
-      .then (() => loadModule('reveal'))
-      .then (() => loadModule('parallax'))
-      .then (() => loadModule('map'));
+    const hero = await import('./modules/hero');
+    const reveal = await import('./modules/reveal-effect');
+    const parallax = await import('./modules/parallax');
+    const map = await import('./modules/map');
 
-    loadReviews().then(() => loadModule('carousel'));
+    loadReviews().then(() => loadCarousel());
     loadCardFeed();
   }
   if (
     parsedUrl.pathname === '/about' ||
     parsedUrl.pathname === '/about.html'
   ) {
-    loadModule('slides');
+    const slideshow = await import('./modules/slideshow');
   }
   if (
     parsedUrl.pathname === '/menu' ||
     parsedUrl.pathname === '/menu.html'
   ) {
-    loadModule('slides')
-      .then (() => loadModule('tabs'))
-      .then (() => loadModule('pdf'));
+    const slideshow = await import('./modules/slideshow');
+    const tabs = await import('./modules/tabs');
+    const pdf = await import('./modules/pdf-viewer');
   }
   if (
     parsedUrl.pathname === '/atm' ||
     parsedUrl.pathname === '/atm.html'
   ) {
-    loadModule('pano');
+    const panorama = await import('./modules/panorama');
   }
   if (
     parsedUrl.pathname === '/gallery' ||
     parsedUrl.pathname === '/gallery.html'
   ) {
-    loadModule('slides');
+    const slideshow = await import('./modules/slideshow');
   }
 
   loadNav();
 })();
+/* eslint-enable no-unused-vars */
 
 async function loadNav() {
-  const { default: DisclosureForNav } = await import('./modules/nav.js');
+  const { default: DisclosureForNav } = await import('./modules/nav');
   // eslint-disable-next-line no-unused-vars
   const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
 async function loadReviews() {
-  const { default: Reviews } = await import('./modules/reviews.js');
+  const { default: Reviews } = await import('./modules/reviews');
+
   const scrollRoot = doc.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
   const firstReview = review1;
@@ -99,12 +87,13 @@ async function loadReviews() {
         observer.unobserve(entry.target);
       }
     }
-  });
+  })
   loadObserver.observe(firstReview, options);
 }
 
 async function loadCardFeed() {
-  const { default: CardFeed } = await import('./modules/card-feed.js');
+  const { default: CardFeed } = await import('./modules/card-feed');
+
   const scrollRoot = doc.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
   const firstPost = post1;
@@ -113,6 +102,7 @@ async function loadCardFeed() {
     rootMargin: '0px',
     threshold: 0,
   }
+
   const loadObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);
@@ -124,4 +114,9 @@ async function loadCardFeed() {
     }
   });
   loadObserver.observe(firstPost, options);
+}
+
+async function loadCarousel() {
+  // eslint-disable-next-line no-unused-vars
+  const carousel = await import('./modules/carousel');
 }
