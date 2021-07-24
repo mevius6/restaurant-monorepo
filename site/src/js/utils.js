@@ -126,6 +126,7 @@ const createNodeWithClass = (expr, con) => {
   return elem;
 };
 
+// const objectEntries = (obj) => Object.entries(obj);
 // const objectKeys = (obj) => Object.keys(obj);
 
 function handleAriaExpanded(evt) {
@@ -238,9 +239,7 @@ function trapFocus(element) {
  *   root: document.querySelector('[data-io-root]'),
  *   rootMargin: '0px',
  *   threshold: [1.0],
- *   // V2: Track the actual visibility of the element
  *   trackVisibility: true,
- *   // V2: Set a minimum delay b/t notifications
  *   delay: 100
  * }
  *

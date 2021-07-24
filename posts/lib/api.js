@@ -1,5 +1,5 @@
-const API_URL = 'https://graphql.datocms.com'
-const API_TOKEN = process.env.DATOCMS_API_TOKEN
+const API_URL = 'https://graphql.datocms.com';
+const API_TOKEN = process.env.DATOCMS_API_TOKEN;
 
 // See: https://www.datocms.com/blog/offer-responsive-progressive-lqip-images-in-2020
 const responsiveImageFragment = `
@@ -16,7 +16,7 @@ const responsiveImageFragment = `
     bgColor
     base64
   }
-`
+`;
 
 async function fetchAPI(query, { variables, preview } = {}) {
   const res = await fetch(API_URL + (preview ? '/preview' : ''), {
@@ -29,14 +29,14 @@ async function fetchAPI(query, { variables, preview } = {}) {
       query,
       variables,
     }),
-  })
+  });
 
-  const json = await res.json()
+  const json = await res.json();
   if (json.errors) {
-    console.error(json.errors)
-    throw new Error('Failed to fetch API')
+    console.error(json.errors);
+    throw new Error('Failed to fetch API');
   }
-  return json.data
+  return json.data;
 }
 
 export async function getPreviewPostBySlug(slug) {
@@ -53,8 +53,8 @@ export async function getPreviewPostBySlug(slug) {
         slug,
       },
     }
-  )
-  return data?.post
+  );
+  return data?.post;
 }
 
 export async function getAllPostsWithSlug() {
@@ -64,8 +64,8 @@ export async function getAllPostsWithSlug() {
         slug
       }
     }
-  `)
-  return data?.allPosts
+  `);
+  return data?.allPosts;
 }
 
 export async function getAllPostsForHome(preview) {
@@ -94,34 +94,34 @@ export async function getAllPostsForHome(preview) {
     ${responsiveImageFragment}
   `,
     { preview }
-  )
-  return data?.allPosts
+  );
+  return data?.allPosts;
 }
 
 export async function getPostAndMorePosts(slug, preview) {
   const data = await fetchAPI(
     `
-  query PostBySlug($slug: String) {
-    post(filter: {slug: {eq: $slug}}) {
-      title
-      slug
-      content
-      date
-      ogImage: coverImage{
-        url(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 })
-      }
-      coverImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImageFragment
+query PostBySlug($slug: String) {
+      post(filter: {slug: {eq: $slug}}) {
+        title
+        slug
+        content
+        date
+        ogImage: coverImage{
+          url(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 })
+        }
+        coverImage {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+            ...responsiveImageFragment
+          }
+        }
+        author {
+          name
+          picture {
+            url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
+          }
         }
       }
-      author {
-        name
-        picture {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
-        }
-      }
-    }
 
     morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
       title
@@ -150,6 +150,6 @@ export async function getPostAndMorePosts(slug, preview) {
         slug,
       },
     }
-  )
-  return data
+  );
+  return data;
 }
