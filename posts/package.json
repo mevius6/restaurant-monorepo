@@ -6,6 +6,16 @@
     "build": "next build",
     "start": "next start"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mevius6/restaurant-monorepo.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mevius6/restaurant-monorepo/issues"
+  },
+  "homepage": "https://github.com/mevius6/restaurant-monorepo#readme",
   "dependencies": {
     "classnames": "2.2.6",
     "date-fns": "2.14.0",
@@ -20,6 +30,5 @@
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0"
-  },
-  "license": "MIT"
+  }
 }
