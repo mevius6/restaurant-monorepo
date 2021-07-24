@@ -1,12 +1,11 @@
 const parsedUrl = new URL(window.location.href);
 const doc = document,
       root = doc.documentElement;
-const PATH = './modules';
 
 // https://github.com/tc39/proposal-dynamic-import
 /* eslint-disable no-unused-vars */
 (async () => {
-  const toggle = await import(`${PATH}/theme-switcher`).then(() => {
+  const toggle = await import('./modules/theme-switcher.js').then(() => {
     const themeSwitch = doc.querySelector('theme-switch');
     root.setAttribute('data-theme-style', themeSwitch.mode === 'dark'
       ? 'dark'
@@ -21,10 +20,10 @@ const PATH = './modules';
     parsedUrl.pathname === '/' ||
     parsedUrl.pathname === '/index.html'
   ) {
-    const hero = await import(`${PATH}/hero`);
-    const reveal = await import(`${PATH}/reveal-effect`);
-    const parallax = await import(`${PATH}/parallax`);
-    const map = await import(`${PATH}/map`);
+    const hero = await import('./modules/hero');
+    const reveal = await import('./modules/reveal-effect');
+    const parallax = await import('./modules/parallax');
+    const map = await import('./modules/map');
 
     loadReviews().then(() => loadCarousel());
     loadCardFeed();
@@ -33,27 +32,27 @@ const PATH = './modules';
     parsedUrl.pathname === '/about' ||
     parsedUrl.pathname === '/about.html'
   ) {
-    const slideshow = await import(`${PATH}/slideshow`);
+    const slideshow = await import('./modules/slideshow');
   }
   if (
     parsedUrl.pathname === '/menu' ||
     parsedUrl.pathname === '/menu.html'
   ) {
-    const slideshow = await import(`${PATH}/slideshow`);
-    const tabs = await import(`${PATH}/tabs`);
-    const pdf = await import(`${PATH}/pdf-viewer`);
+    const slideshow = await import('./modules/slideshow');
+    const tabs = await import('./modules/tabs');
+    const pdf = await import('./modules/pdf-viewer');
   }
   if (
     parsedUrl.pathname === '/atm' ||
     parsedUrl.pathname === '/atm.html'
   ) {
-    const pano = await import(`${PATH}/panorama`);
+    const pano = await import('./modules/panorama');
   }
   if (
     parsedUrl.pathname === '/gallery' ||
     parsedUrl.pathname === '/gallery.html'
   ) {
-    const slideshow = await import(`${PATH}/slideshow`);
+    const slideshow = await import('./modules/slideshow');
   }
 
   loadNav();
@@ -61,13 +60,13 @@ const PATH = './modules';
 /* eslint-enable no-unused-vars */
 
 async function loadNav() {
-  const { default: DisclosureForNav } = await import(`${PATH}/nav`);
+  const { default: DisclosureForNav } = await import('./modules/nav');
   // eslint-disable-next-line no-unused-vars
   const navBtn = new DisclosureForNav(doc.querySelector('.nav-button'));
 }
 
 async function loadReviews() {
-  const { default: Reviews } = await import(`${PATH}/reviews`);
+  const { default: Reviews } = await import('./modules/reviews');
 
   const scrollRoot = doc.querySelector('[data-id="reviews"]');
   // eslint-disable-next-line no-undef
@@ -91,7 +90,7 @@ async function loadReviews() {
 }
 
 async function loadCardFeed() {
-  const { default: CardFeed } = await import(`${PATH}/card-feed`);
+  const { default: CardFeed } = await import('./modules/card-feed');
 
   const scrollRoot = doc.querySelector('[data-id="posts"]');
   // eslint-disable-next-line no-undef
@@ -117,5 +116,5 @@ async function loadCardFeed() {
 
 async function loadCarousel() {
   // eslint-disable-next-line no-unused-vars
-  const carousel = await import(`${PATH}/carousel`);
+  const carousel = await import('./modules/carousel');
 }
