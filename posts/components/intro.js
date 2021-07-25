@@ -2,10 +2,10 @@ export default function Intro() {
   return (
     <section className="intro">
       <h1 className="title">
-        Блог
+        ХочуТорт
       </h1>
       <h4 className="subhead">
-        Подзаголовок
+        Блог
       </h4>
     </section>
   )

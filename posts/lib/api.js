@@ -36,13 +36,13 @@ async function fetchAPI(query, { variables, preview } = {}) {
     console.error(json.errors);
     throw new Error('Failed to fetch API');
   }
+
   return json.data;
 }
 
 export async function getPreviewPostBySlug(slug) {
   const data = await fetchAPI(
-    `
-    query PostBySlug($slug: String) {
+    `query PostBySlug($slug: String) {
       post(filter: {slug: {eq: $slug}}) {
         slug
       }
@@ -54,6 +54,7 @@ export async function getPreviewPostBySlug(slug) {
       },
     }
   );
+
   return data?.post;
 }
 
@@ -65,12 +66,12 @@ export async function getAllPostsWithSlug() {
       }
     }
   `);
+
   return data?.allPosts;
 }
 
 export async function getAllPostsForHome(preview) {
-  const data = await fetchAPI(
-    `
+  const data = await fetchAPI(`
     {
       allPosts(orderBy: date_DESC, first: 20) {
         title
@@ -95,13 +96,13 @@ export async function getAllPostsForHome(preview) {
   `,
     { preview }
   );
+
   return data?.allPosts;
 }
 
 export async function getPostAndMorePosts(slug, preview) {
-  const data = await fetchAPI(
-    `
-query PostBySlug($slug: String) {
+  const data = await fetchAPI(`
+    query PostBySlug($slug: String) {
       post(filter: {slug: {eq: $slug}}) {
         title
         slug
@@ -123,33 +124,31 @@ query PostBySlug($slug: String) {
         }
       }
 
-    morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
-      title
-      slug
-      excerpt
-      date
-      coverImage {
-        responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImageFragment
+      morePosts: allPosts(orderBy: date_DESC, first: 2, filter: {slug: {neq: $slug}}) {
+        title
+        slug
+        excerpt
+        date
+        coverImage {
+          responsiveImage(imgixParams: {fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+            ...responsiveImageFragment
+          }
         }
-      }
-      author {
-        name
-        picture {
-          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
+        author {
+          name
+          picture {
+            url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
+          }
         }
       }
     }
-  }
 
-  ${responsiveImageFragment}
+    ${responsiveImageFragment}
   `,
-    {
-      preview,
-      variables: {
-        slug,
-      },
-    }
-  );
+  {
+    preview,
+    variables: { slug },
+  });
+
   return data;
 }
