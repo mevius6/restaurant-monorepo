@@ -11,13 +11,16 @@
     "sourceType": "module"
   },
   "rules": {
-    "max-len": [
-      "error",
-      {
-        "ignoreStrings": true,
-        "ignoreUrls": true,
-        "ignoreTemplateLiterals": true
-      }
-    ]
+    "max-len": ["error", {
+      "ignoreStrings": true,
+      "ignoreUrls": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "prefer-destructuring": ["error", {
+      "array": true,
+      "object": true
+    }, {
+      "enforceForRenamedProperties": false
+    }]
   }
 }
