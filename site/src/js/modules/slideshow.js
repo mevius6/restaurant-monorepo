@@ -1,8 +1,4 @@
 import { gsap } from 'gsap';
-// import { calcWinsize } from './utils';
-
-// let winsize = calcWinsize();
-// window.addEventListener('resize', () => (winsize = calcWinsize()));
 
 export default class Slideshow {
   constructor(el) {

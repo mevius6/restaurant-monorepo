@@ -7,6 +7,7 @@ import heroImage2_mod from 'url:../../images/hero/2.webp';
 import heroImage3_mod from 'url:../../images/hero/3.webp';
 
 const webp = document.documentElement.classList.contains('webp');
+// eslint-disable-next-line no-undef
 const heroEl = hero;
 const heroImages = {
   old: [heroImage1, heroImage2, heroImage3],

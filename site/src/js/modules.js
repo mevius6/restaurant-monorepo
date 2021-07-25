@@ -116,7 +116,7 @@ async function createObserver(el, ops={}) {
   const observer = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       // console.log(entries);
-      isIntersecting = entry.isIntersecting;
+      ({ isIntersecting } = entry);
       if (isIntersecting) observer.unobserve(entry.target);
     }
   });

@@ -15,14 +15,13 @@ export default class TabContainerElement extends HTMLElement {
   constructor() {
     super();
     this.addEventListener('keydown', (event) => {
-      const target = event.target;
+      const { target } = event;
       if (!(target instanceof HTMLElement)) return;
       if (target.closest(this.tagName) !== this) return;
       if (
         target.getAttribute('role') !== 'tab' &&
         !target.closest('[role="tablist"]')
-      )
-        return;
+      ) return;
       const tabs = getTabs(this);
       const currentIndex = tabs.indexOf(
         tabs.find((tab) => tab.matches('[aria-selected="true"]'))

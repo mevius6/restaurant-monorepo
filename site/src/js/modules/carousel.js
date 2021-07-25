@@ -38,7 +38,7 @@ export default class Carousel {
       .getPropertyValue('--columns');
     this.DOM.totalItems = this.DOM.columns || this.DOM.items.length;
 
-    this.DOM.firstItem = this.DOM.items[0];
+    [this.DOM.firstItem] = this.DOM.items;
     this.DOM.itemWidth = getWidth(this.DOM.firstItem);
     this.DOM.wrap = this.DOM.firstItem.parentNode;
     this.DOM.wrapWidth = getWidth(this.DOM.wrap);

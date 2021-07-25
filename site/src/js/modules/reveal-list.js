@@ -16,7 +16,7 @@ export const revealList = (lists) => {
   lists.forEach(list => {
     let items = list.childNodes;
 
-    gsap.set(items, { opacity: 0, y: 24});
+    gsap.set(items, { opacity: 0, y: 24 });
 
     ScrollTrigger.create({
       // markers: true,

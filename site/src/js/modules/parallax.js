@@ -72,6 +72,7 @@ export const parallaxImages = (images) => {
       }
     }
 
+    // eslint-disable-next-line no-unused-vars
     let st;
     let parallaxImageTween;
     mql.addListener((e) => handleMatches(e.matches));
@@ -85,5 +86,5 @@ export const parallaxImages = (images) => {
   });
 }
 
-/* eslint-disable-next-line no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const parallax = parallaxImages(selectAll('.parallax-image'));

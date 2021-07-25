@@ -91,6 +91,7 @@ export class Review {
       // input.value = `review${id}-${i}`
       // input.id = input.value
       // input.nextElementSibling.for = input.id
+      // eslint-disable-next-line prefer-destructuring
       let num = input.value.split('-')[1];
       if (rating === num) input.checked = true;
     });
