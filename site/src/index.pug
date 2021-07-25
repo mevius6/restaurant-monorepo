@@ -1,6 +1,6 @@
 extends ./pug/page
 
-append pre-connections
+append resource-hint-links
   each host in hosts
     link(rel="preconnect" href=`https://${host}` crossorigin)
 
