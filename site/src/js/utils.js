@@ -1,6 +1,5 @@
 const UA = navigator.userAgent;
-const root = document.documentElement;
-const body = document.body;
+const {documentElement, body} = document;
 
 const math = {
   map: (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c,
@@ -25,8 +24,8 @@ const getMousePos = (e) => {
     posx = e.pageX;
     posy = e.pageY;
   } else if (e.clientX || e.clientY) {
-    posx = e.clientX + body.scrollLeft + root.scrollLeft;
-    posy = e.clientY + body.scrollTop + root.scrollTop;
+    posx = e.clientX + body.scrollLeft + documentElement.scrollLeft;
+    posy = e.clientY + body.scrollTop + documentElement.scrollTop;
   }
 
   return { x: posx, y: posy };
@@ -204,7 +203,7 @@ function checkSystem() {
 // https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element
 function trapFocus(element) {
   let focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'),
-      firstFocusableEl = focusableEls[0],
+      [firstFocusableEl] = focusableEls,
       lastFocusableEl = focusableEls[focusableEls.length - 1];
   const KEYCODE_TAB = 9;
 
@@ -247,6 +246,7 @@ function trapFocus(element) {
  *   animationObserver.observe(element, options);
  * }
  */
+// eslint-disable-next-line no-unused-vars
 const animationObserver = new IntersectionObserver((entries, observer) => {
   for (const entry of entries) {
     entry.target.classList.toggle('js-anim--running', entry.isIntersecting)
