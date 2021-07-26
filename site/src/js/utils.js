@@ -1,5 +1,6 @@
 const UA = navigator.userAgent;
-const {documentElement, body} = document;
+const { innerWidth, innerHeight } = window;
+const { documentElement, body } = document;
 
 const math = {
   map: (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c,
@@ -12,7 +13,7 @@ const math = {
 };
 
 const calcWinsize = () => {
-  return { ww: window.innerWidth, wh: window.innerHeight };
+  return { ww: innerWidth, wh: innerHeight };
 };
 
 const getMousePos = (e) => {
@@ -125,8 +126,24 @@ const createNodeWithClass = (expr, con) => {
   return elem;
 };
 
-// const objectEntries = (obj) => Object.entries(obj);
+const randomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const isObject = (obj) => {
+   return Object.prototype.toString.call(obj) === '[object Object]';
+};
+
+const objectEntries = (obj) => Object.entries(obj);
 // const objectKeys = (obj) => Object.keys(obj);
+
+const isArrEmpty = (arr) => !Array.isArray(arr) || arr.length === 0;
+const isObjEmpty = (obj) => !isObject(obj) || objectEntries(obj).length === 0;
+
+const isEmpty = (expr) => {
+  if (Array.isArray(expr)) return isArrEmpty(expr);
+  if (isObject(expr)) return isObjEmpty(expr);
+  // if (Array.isArray(expr)) return expr.length === 0;
+  // if (isObject(expr)) return objectEntries(expr).length === 0;
+}
 
 function handleAriaExpanded(evt) {
   let isExpanded = evt.currentTarget.getAttribute('aria-expanded') === 'true';
@@ -138,6 +155,7 @@ function handleAriaExpanded(evt) {
 
 /**
  * https://developers.google.com/web/fundamentals/primers/async-functions#async_return_values
+ *
  * https://davidwalsh.name/javascript-promise-tricks
  *
  * @param {*} ms время в миллисекундах
@@ -253,8 +271,6 @@ const animationObserver = new IntersectionObserver((entries, observer) => {
   }
 });
 
-const randomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
 export {
   math,
   calcWinsize,
@@ -271,6 +287,7 @@ export {
   createNode,
   appendNode,
   createNodeWithClass,
+  isEmpty,
   handleAriaExpanded,
   delay,
   asyncFetchJSON,
