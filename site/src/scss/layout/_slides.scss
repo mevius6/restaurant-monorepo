@@ -3,9 +3,9 @@
 .slides {
   $init: &;
   $two-columns: #{&}--2columns;
-  $a: #{&}--1;
-  $b: #{&}--2;
-  $c: #{&}--3;
+  $1st: #{&}--1;
+  $2nd: #{&}--2;
+  $3rd: #{&}--3;
 
   position: relative;
   inline-size: 100%;
@@ -39,8 +39,8 @@
       &:nth-of-type(3) img { object-position: 50% 25%; }
     }
 
-    #{$a} & { @include config.bg-images('slides1'); }
-    #{$c} & { @include config.bg-images('slides3'); }
+    #{$1st} & { @include config.bg-images('slides1'); }
+    #{$3rd} & { @include config.bg-images('slides3'); }
   }
 
   .bg-image {
@@ -229,7 +229,10 @@
       }
 
       &__text {
-        #{$two-columns} & { place-self: center; }
+        #{$two-columns} & {
+          place-self: center;
+          padding-inline: var(--spacer-3);
+        }
       }
 
       &__control {
