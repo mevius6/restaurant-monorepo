@@ -51,6 +51,9 @@ mixin slides(props)
             else
               p.body
                 | #{item.field}
+                if item.link
+                  +link({ phone: item.link })(itemprop="telephone")
+
     if props.count
       .slides__counter
         .slides__counter-current.num= 1
