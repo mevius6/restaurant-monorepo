@@ -1,6 +1,5 @@
 // https://adrianroselli.com/2019/10/accessible-drop-caps.html#Ideal
 // https://css-tricks.com/snippets/css/drop-caps/
-
 @mixin drop-cap($size: 6rem, $lh: 0.65) {
   &::first-letter {
     float: left;

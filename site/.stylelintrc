@@ -294,7 +294,7 @@
       "always-multi-line",
       {
         "except": ["after-single-line-comment", "first-nested"],
-        "ignore": ["after-comment"],
+        "ignore": ["after-comment"]
       }
     ],
 
@@ -346,6 +346,6 @@
     ],
 
     "no-descending-specificity": null,
-    "no-empty-source": null,
+    "no-empty-source": null
   }
 }

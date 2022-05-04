@@ -22,22 +22,23 @@
   },
   "homepage": "https://github.com/mevius6/restaurant-monorepo#readme",
   "devDependencies": {
-    "@parcel/packager-raw-url": "^2.0.0-beta.3.1",
-    "@parcel/transformer-image": "^2.0.0-beta.3.1",
-    "@parcel/transformer-pug": "^2.0.0-beta.3.1",
-    "@parcel/transformer-sass": "^2.0.0-beta.3.1",
-    "@parcel/transformer-webmanifest": "^2.0.0-beta.3.1",
-    "eslint": "^7.29.0",
-    "parcel": "^2.0.0-beta.3.1",
-    "postcss": "^8.3.5",
-    "postcss-preset-env": "^6.7.0",
+    "@parcel/packager-raw-url": "^2.5.0",
+    "@parcel/transformer-image": "^2.5.0",
+    "@parcel/transformer-pug": "^2.5.0",
+    "@parcel/transformer-sass": "^2.5.0",
+    "@parcel/transformer-webmanifest": "^2.5.0",
+    "eslint": "^8.13.0",
+    "events": "^3.3.0",
+    "parcel": "^2.5.0",
+    "postcss": "^8.4.12",
+    "postcss-preset-env": "^7.4.3",
     "pug": "^3.0.2",
-    "sass": "^1.35.1",
-    "stylelint": "^13.13.1",
-    "stylelint-order": "^4.1.0"
+    "sass": "^1.50.0",
+    "stylelint": "^14.6.1",
+    "stylelint-order": "^5.0.0"
   },
   "dependencies": {
-    "gsap": "^3.7.0",
+    "gsap": "^3.10.3",
     "splitting": "^1.0.6"
   },
   "browserslist": [

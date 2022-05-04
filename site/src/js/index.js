@@ -8,7 +8,7 @@ import {
 
 const doc = document,
       root = doc.documentElement,
-      body = doc.body;
+      {body} = doc;
 
 // const os = checkSystem();
 const browser = checkBrowser();

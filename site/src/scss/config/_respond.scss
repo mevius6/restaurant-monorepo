@@ -2,7 +2,6 @@
 @use 'sass:map';
 
 // ? https://github.com/propjockey/css-media-vars
-
 @mixin respond($breaks...) {
   $width-breaks: (
     'mobile': 20em,

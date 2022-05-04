@@ -1,5 +1,4 @@
 // https://drafts.csswg.org/css-fonts-4/#font-named-instance
-
 @function weight($axis: 0) {
   $tag: 'wght';
   $preset-instances: (
