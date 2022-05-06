@@ -20,15 +20,6 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://www.instagram.com/hochutort/"
-                target="_blank" rel="noopener noreferrer"
-                className=""
-              >
-                <span data-icon="ig"></span>
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://www.tripadvisor.com/Restaurant_Review-g298502-d13389672-Reviews-Cafe_Confectionery_KhochuTort-Veliky_Novgorod_Novgorod_Oblast_Northwestern_Distr.html"
                 target="_blank" rel="noopener noreferrer"
                 className=""
