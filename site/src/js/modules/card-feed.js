@@ -80,7 +80,7 @@ class Card extends EventEmitter {
   async _displayContent(title, excerpt, date, slug) {
     this.DOM.title.textContent = title;
     this.DOM.body.textContent = excerpt;
-    this.DOM.cta.href = `https://blog.hochutort.com/posts/${slug}`;
+    this.DOM.cta.href = `https://blog.htort.ru/posts/${slug}`;
     this.DOM.cta.target = '_blank';
     this.DOM.cta.rel = 'noopener';
 
